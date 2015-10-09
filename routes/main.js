@@ -24,6 +24,10 @@ exports.comp = function (req, res){
 
 }
 
+exports.judge = function (req, res){
+    res.render('judgeComp');
+
+}
 
 //log user in or redirect
 exports.login = function (req, res){
