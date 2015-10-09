@@ -19,6 +19,12 @@ exports.newComp = function (req, res){
 
 }
 
+exports.comp = function (req, res){
+    res.render('compProfile');
+
+}
+
+
 //log user in or redirect
 exports.login = function (req, res){
     if(req.session.user ){
