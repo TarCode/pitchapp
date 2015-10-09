@@ -14,6 +14,11 @@ exports.showOrgList = function (req, res){
 
 }
 
+exports.newComp = function (req, res){
+    res.render('newComp');
+
+}
+
 //log user in or redirect
 exports.login = function (req, res){
     if(req.session.user ){
