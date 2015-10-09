@@ -9,6 +9,11 @@ exports.land = function (req, res){
 
 }
 
+exports.showOrgList = function (req, res){
+    res.render('orgList');
+
+}
+
 //log user in or redirect
 exports.login = function (req, res){
     if(req.session.user ){

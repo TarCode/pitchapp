@@ -27,6 +27,8 @@ app.use(bodyParser.json());
 //app.use(session({secret: "bookworms", cookie: {maxAge: 120000}, resave:true, saveUninitialized: false}));
 
 app.get('/', main.land);
+app.get('/compList', main.showOrgList);
+
 
 
 //middleware user check
