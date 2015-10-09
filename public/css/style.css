@@ -1,0 +1,76 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+nav .brand-logo {
+    position: absolute;
+    color: #fff;
+    display: inline-block;
+    font-size: 2.1rem;
+    padding: 0;
+    white-space: nowrap;
+    background-image: url("../img/pitchapp.png");
+    background-size: cover;
+    width: 5em;
+    height: 1.5em;
+}
+.listButton{
+  float: right;
+  position: relative;
+  margin: 0.3em;
+}
+
+.closeJudge{
+  display: none;
+  color: red;
+  padding-bottom: 0.1em;
+
+
+}
+
+#judgeBtn{
+  display: none;
+}
+.openJudge{
+  color: green;
+  padding-bottom: 0.1em;
+}
+.closeComp{
+  display: none;
+  color: red;
+  padding-bottom: 0.1em;
+
+
+}
+.openComp{
+  color: green;
+  padding-bottom: 0.1em;
+}
+.badge{
+  margin-top: 2em;
+  margin-bottom: 0em;
+  display: block;
+}
+.collection .collection-item{
+  padding:1.5%;
+}
+.chip{background-color: white;}
+.video{width:100%;
+    margin-top: 1%;
+    height:20em;
+  }
+.video{
+  margin-top:1%;
+  padding:2%;
+}
