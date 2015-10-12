@@ -14,7 +14,7 @@ exports.showOrgList = function(req, res, next){
        if (err)
            return next(err);
 
-                connection.query('SELECT * FROM competition', [], function(err, results) {
+                connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time  FROM competition', [], function(err, results) {
                     if (err) return next(err);
                  res.render('orgList',  {comp:results});
             });
@@ -31,7 +31,7 @@ exports.comp = function (req, res, next){
    if (err)
        return next(err);
             var comp_id = req.params.id;
-            connection.query('SELECT * FROM competition WHERE id = ?', [comp_id], function(err, results) {
+            connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time FROM competition WHERE id = ?', [comp_id], function(err, results) {
                 if (err) return next(err);
                 res.render('compProfile',  {comp:results});
         });
