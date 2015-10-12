@@ -1,0 +1,64 @@
+<div class="container">
+<!--FORM START-->
+  <div class="row">
+    <form class="col s12" action = "/startup/new/add/{{comp_id}}" method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <input  name="startup_name" type="text" class="validate">
+          <label for="startup_name">Startup Name</label>
+        </div>
+
+        <div class="input-field col s12">
+          <input name="location" type="text" class="validate">
+          <label for="location">Location</label>
+        </div>
+
+        <div class="input-field col s12">
+          <input name="industry" type = "text" class="validate"></input>
+          <label for="industry">Industry</label>
+        </div>
+
+        <div class="input-field col s12">
+          <input name="sector" type = "text" class="validate"></input>
+          <label for="sector">Sector</label>
+        </div>
+
+
+        <div class="input-field col s12">
+          <input name="employees" type = "number" class="validate"></input>
+          <label for="employees">Employees</label>
+        </div>
+
+
+        <div class="input-field col s12">
+          <input name="stage" type = "text" class="validate"></input>
+          <label for="stage">Stage</label>
+        </div>
+
+        <div class="input-field col s12">
+          <input name="turnover" type = "number" class="validate"></input>
+          <label for="turnover">Turnover</label>
+        </div>
+
+        <div class="input-field col s12">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Upload Image</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input name = "image_url" class="file-path validate" type="text">
+            </div>
+          </div>
+        </div>
+
+        <div class="input-field col s12">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+<!--FORM END-->

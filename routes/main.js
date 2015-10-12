@@ -21,11 +21,56 @@ exports.showOrgList = function(req, res, next){
 
     });
   };
-exports.newComp = function (req, res){
-    res.render('newComp');
+  exports.showStartupList = function(req, res, next){
+        req.getConnection(function(err, connection){
+         if (err)
+             return next(err);
+
+                  connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time  FROM competition', [], function(err, results) {
+                      if (err) return next(err);
+                   res.render('startupList',  {comp:results});
+              });
+
+      });
+    };
+
+exports.newStartup = function (req, res){
+    res.render('newStartup', {comp_id : req.params.id});
 
 }
 
+exports.addStartup = function (req, res, next){
+  req.getConnection(function(err, connection){
+   if (err)  console.log(err);
+   var input = JSON.parse(JSON.stringify(req.body));
+   var data = {
+     name: input.startup_name,
+     image_url: "/img/"+input.image_url,
+     location: input.location,
+     industry: input.industry,
+     sector: input.sector,
+     employees: input.employees,
+     stage: input.stage,
+     turnover: input.turnover
+   }
+
+      connection.query('INSERT INTO startup SET ?', [data], function(err, results) {
+        if (err) console.log(err);
+          connection.query('SELECT id FROM startup WHERE name = ?', [data.name], function(err, startup_id) {
+            if (err) console.log(err);
+            var entryData = {
+              startup_id : startup_id[0].id,
+              competition_id : req.params.id
+            }
+            connection.query('INSERT INTO entrants SET ?', [entryData], function(err, results) {
+              if (err) console.log(err);
+              res.redirect('/startup/compList');
+            });
+          });
+      });
+
+  });
+}
 exports.comp = function (req, res, next){
   req.getConnection(function(err, connection){
    if (err)
@@ -33,7 +78,24 @@ exports.comp = function (req, res, next){
             var comp_id = req.params.id;
             connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time FROM competition WHERE id = ?', [comp_id], function(err, results) {
                 if (err) return next(err);
-                res.render('compProfile',  {comp:results});
+                connection.query('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.competition_id = ?', [comp_id], function(err, results1) {
+                    if (err) return next(err);
+                  res.render('compProfile',  {comp:results,
+                                              entrants: results1});
+                });
+            });
+
+  });
+}
+
+exports.startupComp = function (req, res, next){
+  req.getConnection(function(err, connection){
+   if (err)
+       return next(err);
+            var comp_id = req.params.id;
+            connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time FROM competition WHERE id = ?', [comp_id], function(err, results) {
+                if (err) return next(err);
+                res.render('startupCompProfile',  {comp:results});
         });
 
   });
@@ -50,7 +112,10 @@ exports.delComp = function (req, res, next){
 
   });
 }
+exports.newComp = function (req, res){
+    res.render('newComp');
 
+}
 exports.addComp = function (req, res, next){
   req.getConnection(function(err, connection){
    if (err)  console.log(err);

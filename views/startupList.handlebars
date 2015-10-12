@@ -6,22 +6,11 @@
     <!--COMP SECTION START-->
     <div id="comp" class="col s12">
       <div class = "container">
-        <!--NEW COMPETITION START-->
-        <a href = "/comp/new"><div class="row">
-          <div class="col s3"><br><i class="large material-icons">add</i></div>
-          <div class="col s9">
-            <br><br>
-            <span class="flow-text">Add New Competition
-            </span>
-          </div>
-        </div></a>
-        <hr/>
-        <!--NEW COMPETITION END -->
 
         <!--COMPETITION START -->
         {{#comp}}
           <div class="row">
-            <a href = "/org/comp/{{id}}">
+            <a href = "/startup/comp/{{id}}">
             <div class="col s3"><img class = "responsive-img circle" src = "{{image_url}}"></div>
             <div class="col s6">
               <span class="flow-text">{{name}}</span>
@@ -36,8 +25,7 @@
             </div>
           </a>
             <div class = "col s3">
-              <a href = "/org/comp/delete/{{id}}" class="btn-floating btn-large waves-effect waves-light red listButton"><i class="material-icons">delete</i></a>
-              <a class="btn-floating btn-large waves-effect waves-light green listButton">Open</a>
+              <a href="/startup/new" class="btn-floating btn-large waves-effect waves-light green listButton">Enter</a>
             </div>
           </div>
           <hr/>

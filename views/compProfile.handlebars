@@ -71,6 +71,7 @@
                     <li><strong>4th Prize: </strong>Nothing</li>
                   </ul>
             </div>
+
             <div class="section">
 
             </div>
@@ -145,19 +146,26 @@
         </a>
         <hr/>
         <!--STARTUP START-->
+        {{#entrants}}
         <div class="row">
-          <div class="col s3"><img class = "responsive-img circle" src = "./img/startup3.png"></div>
+          <div class="col s3"><img class = "responsive-img circle" src = "{{image_url}}"></div>
           <div class="col s6">
-            <span class="flow-text">Buber</span>
+            <span class="flow-text">{{name}}</span>
             <br>
             <span class="">
-              <p>Name: Buber Inc
+              <p>Name: {{name}}
                     <br>
-                 Started: 29/10/15
+                 Location: {{location}}
                     <br>
-                 Industry: Tech
+                 Industry: {{industry}}
                     <br>
-                 Turnover: R6bn
+                 Sector: {{sector}}
+                    <br>
+                 Employees: {{employees}}
+                    <br>
+                 Stage: {{stage}}
+                    <br>
+                 Turnover: {{turnover}}
               </p>
             </span>
           </div>
@@ -169,6 +177,7 @@
           </div>
         </div>
         <hr/>
+        {{/entrants}}
         <!--STARTUP END-->
       </div>
     </div>

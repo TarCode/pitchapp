@@ -27,11 +27,19 @@ app.use(bodyParser.json());
 //app.use(session({secret: "bookworms", cookie: {maxAge: 120000}, resave:true, saveUninitialized: false}));
 
 app.get('/', main.land);
-app.get('/compList', main.showOrgList);
-app.get('/comp/new', main.newComp);
-app.post('/comp/new/add', main.addComp);
-app.get('/comp/:id', main.comp);
-app.get('/comp/delete/:id', main.delComp);
+app.get('/org/compList', main.showOrgList);
+app.get('/startup/compList', main.showStartupList);
+
+app.get('/org/comp/new', main.newComp);
+app.post('/org/comp/new/add', main.addComp);
+
+app.get('/org/comp/:id', main.comp);
+app.get('/startup/comp/:id', main.startupComp);
+app.get('/org/comp/delete/:id', main.delComp);
+
+app.get('/startup/new/:id', main.newStartup);
+app.post('/startup/new/add/:id', main.addStartup);
+
 
 app.get('/judge', main.judge);
 

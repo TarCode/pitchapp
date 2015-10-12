@@ -1,0 +1,54 @@
+<div class="section no-pad-bot" id="index-banner">
+
+  </div>
+  <!--CONTENT START-->
+  <div class="row">
+      <!--COMP SECTION START-->
+      <div id="comp" class="col s12">
+
+          <!--COMPETITION START -->
+          {{#comp}}
+            <div class="col s12 m3">
+              <div class="col s12"><img class = "responsive-img circle" src = "{{image_url}}"></div>
+              <div class="col s12">
+                <span class="flow-text">{{name}}</span>
+                <br>
+                <div class="collection">
+                  <a href="#!" class="collection-item"><span class='btn col s12'>Date &nbsp </span><br><br>{{date}}</a>
+                  <a href="#!" class="collection-item"><span class='btn col s12'>Time</span><br><br>{{start_time}} - {{end_time}} </a>
+                  <a href="#!" class="collection-item"><span class='btn col s12'>Location</span><br><br>{{location}}</a>
+                  <a href="#!" class="collection-item"><span class='btn col s12'>Entries</span><br><br>{{entries}}</span></a>
+                </div>
+              </div>
+            </div>
+            <!--COMPETITION END -->
+            <div class = "col s12 m6">
+              <h4>{{organizer}}</h4>
+              <p>{{description}}</p>
+              <hr>
+              <h5>Minimum Requirements</h4>
+                <ul>
+                  <li>Under 5 years old</li>
+                  <li>Turnover less than R1bn</li>
+                  <li>Constrain</li>
+                  <li>Whatever</li>
+                </ul>
+
+                <h5>Prizes</h4>
+                  <ul>
+                    <li><strong>1st Prize: </strong>R500 000</li>
+                    <li><strong>2nd Prize: </strong>R250 000</li>
+                    <li><strong>3rd Prize: </strong>R100 000</li>
+                    <li><strong>4th Prize: </strong>Nothing</li>
+                  </ul>
+            </div>
+            <a href="/startup/new/{{id}}" class="btn-floating btn-large waves-effect waves-light green listButton">Enter</a>
+            <div class="section">
+
+            </div>
+      </div>
+      <!--COMP SECTION END-->
+      {{/comp}}
+
+  </div>
+<!--CONTENT END-->
