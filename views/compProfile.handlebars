@@ -35,27 +35,26 @@
         <hr/>
         <!--OPEN COMP END-->
           <!--COMPETITION START -->
+          {{#comp}}
             <div class="col s12 m3">
-              <div class="col s12"><img class = "responsive-img circle" src = "./img/startup.png"></div>
+              <div class="col s12"><img class = "responsive-img circle" src = "{{image_url}}"></div>
               <div class="col s12">
-                <span class="flow-text">NinjaStartup Pitch Contest</span>
+                <span class="flow-text">{{name}}</span>
                 <br>
                 <div class="collection">
-                  <a href="#!" class="collection-item"><span class='btn col s12'>Date &nbsp </span><br><br>29/10/15</a>
-                  <a href="#!" class="collection-item"><span class='btn col s12'>Time</span><br><br>16h00 - 19h00 </a>
-                  <a href="#!" class="collection-item"><span class='btn col s12'>Location</span><br><br>Cape Town</a>
-                  <a href="#!" class="collection-item"><span class='btn col s12'>Entries</span><br><br>20/30</span></a>
-                  <a href="#!" class="collection-item"><span class='btn col s12'>Website</span><br><br>ninjafund.com </a>
+                  <a href="#!" class="collection-item"><span class='btn col s12'>Date &nbsp </span><br><br>{{date}}</a>
+                  <a href="#!" class="collection-item"><span class='btn col s12'>Time</span><br><br>{{start_time}} - {{end_time}} </a>
+                  <a href="#!" class="collection-item"><span class='btn col s12'>Location</span><br><br>{{location}}</a>
+                  <a href="#!" class="collection-item"><span class='btn col s12'>Entries</span><br><br>{{entries}}</span></a>
                 </div>
               </div>
             </div>
             <!--COMPETITION END -->
             <div class = "col s12 m6">
-              <h4>NinjaStartUp</h4>
-              <p>NinjaStartup is a competition to recognize and reward startups and the entrepreneurs behind them.
-                Held as part of Global Entrepreneurship Week,
-                NinjaStartup will recognize the top 50 startups each year and award prizes to help them grow their business.</p>
+              <h4>{{organizer}}</h4>
+              <p>{{description}}</p>
               <hr>
+              {{/comp}}
               <h5>Minimum Requirements</h4>
                 <ul>
                   <li>Under 5 years old</li>
