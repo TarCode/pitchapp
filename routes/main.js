@@ -16,7 +16,7 @@ exports.showOrgList = function(req, res, next){
 
                 connection.query('SELECT * FROM competition', [], function(err, results) {
                     if (err) return next(err);
-                 res.render('orgList',  {comp:results})
+                 res.render('orgList',  {comp:results});
             });
 
     });
@@ -26,9 +26,29 @@ exports.newComp = function (req, res){
 
 }
 
-exports.comp = function (req, res){
-    res.render('compProfile');
+exports.comp = function (req, res, next){
+  req.getConnection(function(err, connection){
+   if (err)
+       return next(err);
+            var comp_id = req.params.id;
+            connection.query('SELECT * FROM competition WHERE id = ?', [comp_id], function(err, results) {
+                if (err) return next(err);
+                res.render('compProfile',  {comp:results});
+        });
 
+  });
+}
+
+exports.delComp = function (req, res, next){
+  req.getConnection(function(err, connection){
+   if (err)  console.log(err);
+      var comp_id = req.params.id;
+      connection.query('DELETE FROM competition WHERE id = ?', [comp_id], function(err, results) {
+          if (err) console.log(err);
+          res.redirect('/compList');
+      });
+
+  });
 }
 
 exports.judge = function (req, res){

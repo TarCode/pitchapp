@@ -29,7 +29,9 @@ app.use(bodyParser.json());
 app.get('/', main.land);
 app.get('/compList', main.showOrgList);
 app.get('/newComp', main.newComp);
-app.get('/comp', main.comp);
+app.get('/comp/:id', main.comp);
+app.get('/comp/delete/:id', main.delComp);
+
 app.get('/judge', main.judge);
 
 

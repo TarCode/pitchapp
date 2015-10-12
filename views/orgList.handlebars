@@ -21,7 +21,7 @@
         <!--COMPETITION START -->
         {{#comp}}
           <div class="row">
-            <a href = "/comp">
+            <a href = "/comp/{{id}}">
             <div class="col s3"><img class = "responsive-img circle" src = "{{image_url}}"></div>
             <div class="col s6">
               <span class="flow-text">{{name}}</span>
@@ -36,58 +36,13 @@
             </div>
           </a>
             <div class = "col s3">
-              <a class="btn-floating btn-large waves-effect waves-light red listButton"><i class="material-icons">delete</i></a>
+              <a href = "/comp/delete/{{id}}" class="btn-floating btn-large waves-effect waves-light red listButton"><i class="material-icons">delete</i></a>
               <a class="btn-floating btn-large waves-effect waves-light green listButton">Open</a>
             </div>
           </div>
           <hr/>
           {{/comp}}
           <!--COMPETITION END -->
-        <div class="row">
-          <div class="col s3"><img class = "responsive-img circle" src = "./img/startup2.png"></div>
-          <div class="col s6">
-            <span class="flow-text">TreeStartup Competition</span>
-            <br>
-            <span class="">
-              <p>TreeFund
-                    <br>
-                    29/10/15
-                    <br>
-                    16h00 - 19h00
-                    <br>
-                    Entries: 20/30
-              </p>
-            </span>
-          </div>
-          <div class = "col s3">
-            <a class="btn-floating btn-large waves-effect waves-light red listButton"><i class="material-icons">delete</i></a>
-            <a class="btn-floating btn-large waves-effect waves-light green listButton">Open</a>
-          </div>
-        </div>
-        <hr/>
-
-      <div class="row">
-        <div class="col s3"><img class = "responsive-img circle" src = "./img/startup3.png"></div>
-        <div class="col s6">
-          <span class="flow-text">CarStartup Battle</span>
-          <br>
-          <span class="">
-            <p>CarFund
-                  <br>
-                  29/10/15
-                  <br>
-                  16h00 - 19h00
-                  <br>
-                  Entries: 20/30
-            </p>
-          </span>
-        </div>
-        <div class = "col s3">
-          <a class="btn-floating btn-large waves-effect waves-light red listButton"><i class="material-icons">delete</i></a>
-          <a class="btn-floating btn-large waves-effect waves-light green listButton">Open</a>
-        </div>
-      </div>
-      <hr/>
           <br><br>
 
           <div class="section">
