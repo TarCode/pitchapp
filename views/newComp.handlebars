@@ -1,19 +1,23 @@
 <div class="container">
 <!--FORM START-->
   <div class="row">
-    <form class="col s12">
+    <form class="col s12" action = "/comp/new/add" method="POST">
       <div class="row">
         <div class="input-field col s12">
-          <input  id="comp_name" type="text" class="validate">
+          <input  name="comp_name" type="text" class="validate">
           <label for="comp_name">Competition Name</label>
         </div>
         <div class="input-field col s12">
-          <input id="entries" type="number" class="validate">
+          <input name="entries" type="number" class="validate">
           <label for="entries">No. of Entrants</label>
         </div>
         <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1">Description</label>
+          <textarea name="desc" class="materialize-textarea"></textarea>
+          <label for="desc">Description</label>
+        </div>
+        <div class="input-field col s12">
+          <input name="location" type = "text" class="validate"></input>
+          <label for="location">Location</label>
         </div>
         <div class="input-field col s12">
           <div class="file-field input-field">
@@ -22,20 +26,20 @@
               <input type="file">
             </div>
             <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
+              <input name = "image_url" class="file-path validate" type="text">
             </div>
           </div>
         </div>
         <div class="input-field col s12">
-          <input placeholder="Placeholder" id="date" type="date" class="validate">
+          <input placeholder="Placeholder" name="date" type="date" class="validate">
           <label for="date" class = "active">Date</label>
         </div>
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="start_time" type="time" class="validate">
+          <input placeholder="Placeholder" name="start_time" type="time" class="validate">
           <label for="start_time" class = "active">Start Time</label>
         </div>
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="end_time" type="time" class="validate">
+          <input placeholder="Placeholder" name="end_time" type="time" class="validate">
           <label for="end_time" class = "active">End Time</label>
         </div>
         <div class="input-field col s12">

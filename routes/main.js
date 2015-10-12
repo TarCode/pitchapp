@@ -51,6 +51,29 @@ exports.delComp = function (req, res, next){
   });
 }
 
+exports.addComp = function (req, res, next){
+  req.getConnection(function(err, connection){
+   if (err)  console.log(err);
+   var input = JSON.parse(JSON.stringify(req.body));
+   var data = {
+     name: input.comp_name,
+     image_url: "/img/"+input.image_url,
+     organizer: input.comp_name,
+     entrants: input.entries,
+     description: input.desc,
+     location: input.location,
+     date: input.date,
+     start_time: input.start_time,
+     end_time: input.end_time
+   }
+      connection.query('INSERT INTO competition SET ?', [data], function(err, results) {
+          if (err) console.log(err);
+          res.redirect('/compList');
+      });
+
+  });
+}
+
 exports.judge = function (req, res){
     res.render('judgeComp');
 

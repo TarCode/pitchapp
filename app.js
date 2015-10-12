@@ -28,7 +28,8 @@ app.use(bodyParser.json());
 
 app.get('/', main.land);
 app.get('/compList', main.showOrgList);
-app.get('/newComp', main.newComp);
+app.get('/comp/new', main.newComp);
+app.post('/comp/new/add', main.addComp);
 app.get('/comp/:id', main.comp);
 app.get('/comp/delete/:id', main.delComp);
 
