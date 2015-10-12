@@ -1,7 +1,7 @@
 var express = require('express'),
-    //mysql = require('mysql'),
+    mysql = require('mysql'),
     exphbs  = require('express-handlebars'),
-    //myConnection = require('express-myconnection'),
+    myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
     main = require('./routes/main');
     //session = require('express-session');
@@ -9,19 +9,19 @@ var express = require('express'),
 
 var app = express();
 
-/*var dbOptions = {
+var dbOptions = {
      host: 'localhost',
       user: 'tarcode',
       password: 'coder123',
       port: 3306,
-      database: '#'
-};*/
+      database: 'pitchapp'
+};
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 app.use(express.static('public'));
-//app.use(myConnection(mysql, dbOptions, 'single'));
+app.use(myConnection(mysql, dbOptions, 'single'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //app.use(session({secret: "bookworms", cookie: {maxAge: 120000}, resave:true, saveUninitialized: false}));

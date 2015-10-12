@@ -19,19 +19,20 @@
         <!--NEW COMPETITION END -->
 
         <!--COMPETITION START -->
+        {{#comp}}
           <div class="row">
             <a href = "/comp">
-            <div class="col s3"><img class = "responsive-img circle" src = "./img/startup.png"></div>
+            <div class="col s3"><img class = "responsive-img circle" src = "{{image_url}}"></div>
             <div class="col s6">
-              <span class="flow-text">NinjaStartup Pitch Contest</span>
+              <span class="flow-text">{{name}}</span>
               <br>
-                <p>NinjaFund
+                <p>{{organizer}}
                 <br>
-                29/10/15
+                {{date}}
                 <br>
-                16h00 - 19h00
+                {{start_time}} - {{end_time}}
                 <br>
-                Entries: 20/30</p>
+                Entries: {{entries}}</p>
             </div>
           </a>
             <div class = "col s3">
@@ -40,6 +41,7 @@
             </div>
           </div>
           <hr/>
+          {{/comp}}
           <!--COMPETITION END -->
         <div class="row">
           <div class="col s3"><img class = "responsive-img circle" src = "./img/startup2.png"></div>

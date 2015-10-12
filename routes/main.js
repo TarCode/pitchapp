@@ -9,11 +9,18 @@ exports.land = function (req, res){
 
 }
 
-exports.showOrgList = function (req, res){
-    res.render('orgList');
+exports.showOrgList = function(req, res, next){
+      req.getConnection(function(err, connection){
+       if (err)
+           return next(err);
 
-}
+                connection.query('SELECT * FROM competition', [], function(err, results) {
+                    if (err) return next(err);
+                 res.render('orgList',  {comp:results})
+            });
 
+    });
+  };
 exports.newComp = function (req, res){
     res.render('newComp');
 
