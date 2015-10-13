@@ -1,12 +1,12 @@
 (function($){
   $(function(){
     $(".openJudge").click(function(){
-        $("#judgeBtn").show();
+        $(".judgeBtn").show();
         $(".openJudge").hide();
         $(".closeJudge").show();
     });
     $(".closeJudge").click(function(){
-        $("#judgeBtn").hide();
+        $(".judgeBtn").hide();
         $(".openJudge").show();
         $(".closeJudge").hide();
     });

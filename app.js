@@ -36,6 +36,7 @@ app.post('/org/comp/new/add', main.addComp);
 app.get('/org/comp/:id', main.comp);
 app.get('/startup/comp/:id', main.startupComp);
 app.get('/org/comp/delete/:id', main.delComp);
+app.get('/org/startup/delete/:id', main.delStartup);
 
 app.get('/startup/new/:id', main.newStartup);
 app.post('/startup/new/add/:id', main.addStartup);
