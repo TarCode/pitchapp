@@ -21,43 +21,30 @@
     });
 
     $('.button-collapse').sideNav();
-
-   			  $("#valueProposition").rateYo({
-   			    rating: 5,
-   			    ratedFill:'#3498DB'
-   			  });
-   			  $("#bussinessModel").rateYo({
-   			    rating: 4,
-   			    ratedFill:'#3498DB'
-   			  });
-   			  $("#scale").rateYo({
-   			    rating: 3,
-   			    ratedFill:'#3498DB'
-   			  });
-   			  $("#innovation").rateYo({
-   			    rating: 2,
-   			    ratedFill:'#3498DB'
-   			  });
-   			  $("#product").rateYo({
-   			    rating: 2,
-   			    ratedFill:'#3498DB'
-   			  });
-   			  $("#pitch").rateYo({
-   			    rating: 1,
-   			    ratedFill:'#3498DB'
-   			  });
-   			   $("#unfairAdvantage").rateYo({
-   			    rating:0,
-   			    ratedFill:'#3498DB'
-   			  });
-
-
-   			 //Getting the rating value when startup is scored i.e rated
-
-
-   			  $("#valueProposition").rateYo('option','onSet',function(rating,rateYoInstance){
-   			  		$('#valuePropositionScore').html(rating)
-   			  });
-
+    $('.rate').rateYo({
+            rating: 1,
+            ratedFill:'#3498DB'
+          });
+    $('.rate').rateYo('option','onSet',function(rating,rateYoInstance){
+              var id = $(this).get(0).id
+              console.log('setting scrore of :'+id)
+              setScore(id,rating)
+          });
+          
+    $('.giveFeedback').click(function(){
+        console.log('giveFeedack class clicked')
+        console.log($(this).parent())
+        $(this).parent().find('.feedback').css('display','inline')
+        $(this).css('display','none')
+    })
+    $('.submitFeedback').click(function(){
+        console.log('submitFeedack class clicked')
+        console.log($(this).parent())
+        $(this).parent().parent().find('.feedback').css('display','none')
+        console.log( $(this).parent().parent().find('.giveFeedback'))
+        console.log("the button to be viewd")
+        $(this).parent().parent().find('button').css('display','inline')
+        
+    })
   }); // end of document ready
 })(jQuery); // end of jQuery name space

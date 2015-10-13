@@ -1,3 +1,4 @@
+
 <div class='row'>
 
 	<div class='col s12 m3 profile'>
@@ -19,74 +20,53 @@
 
   	<div class='col s12 m8 vidContent'>
 
-  		<iframe class='video' src="https://www.youtube.com/embed/DVu311G5qvI" frameborder="0" allowfullscreen></iframe>
+  		<iframe src="//www.slideshare.net/slideshow/embed_code/key/qAzwgPFPSRmCh9" class="video" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/sallyjenkinson/an-introduction-to-open-data-53732088" title="An introduction to open data" target="_blank">An introduction to open data</a> </strong> from <strong><a href="//www.slideshare.net/sallyjenkinson" target="_blank">Sally Jenkinson</a></strong> </div>
 
   	</div>
 
-
+    
   	<div class='col s12 m8'>
-
+  		
       <ul class="collection">
+      		<li class="collection-item active">
 
- 			    <li class="collection-item">
- 			      <span class="badge"> <div id='valueProposition' class="chip"></div></span>
- 			      <p class="title"><b>Value Proposition</b></p>
- 			      <p>What problem are you solving, for whom?</p>
-
+ 			      
+ 			     
+ 			      <p>Overall Startup Score &nbsp <span class='chip form-control' id='totalScore'></span></p>
+ 			      <button class="btn waves-effect waves-dark orange " type="submit" name="action">Submit
+				    <i class="material-icons right">send</i>
+				  </button>
  			    </li>
 
- 			    <li class="collection-item">
-
- 			      <span class="badge"> <div id='bussinessModel' class="chip"></div></span>
- 			      <p class="title"><b>Business Model</b></p>
- 			      <p>How will you make money? How much? When?</p>
-
- 			    </li>
-
-
+      		{{#criterias}}
+      		
+	      		<script type="text/javascript">      			
+	      			addCriteria('{{elemID}}')
+	      		</script>
  			    <li class="collection-item">
 
- 			      <span class="badge"> <div id='product' class="chip"></div></span>
- 			      <p class="title"><b>Product</b></p>
- 			      <p>How easy is it to use, how well is it built?</p>
+ 			      <span class="badge"> <div id='{{elemID}}' class="chip rate"></div></span>
+ 			      <p class="title"><b>{{name}}</b></p>
+ 			      <p>{{description}}</p>
+ 			      <button class='btn blue lighten-2 giveFeedback' >Give Feedback</button>
+ 			      <div class="row feedback">
+			        <div class="input-field white col s12">
+					           <textarea id="textarea1" class="materialize-textarea feedbackField" ></textarea>
+					           <label for="textarea1">Feedback</label>
+					 </div>
+					 <button class='btn orange submitFeedback' >Submit</button>
+			      </div>
 
  			    </li>
-
- 			   <li class="collection-item">
-
- 			      <span class="badge"> <div id='scale' class="chip"></div></span>
- 			      <p class="title"><b>Scale </b></p>
- 			      <p>Majority Markets vs local vs US</p>
-
- 			   </li>
-
- 			   <li class="collection-item">
-
- 			      <span class="badge"> <div id='innovation' class="chip"></div></span>
- 			      <p class="title"><b>Innovation</b></p>
- 			      <p>Why is this so cool?</p>
-
- 			    </li>
-
- 			   <li class="collection-item">
-
- 			      <span class="badge"><div id='pitch' class="chip" ></div></span>
- 			      <p class="title"><b>Pitch</b></p>
- 			      <p>How good are you at convincing me this is the best thing ever?</p>
-
- 			   </li>
-
- 			    <li class="collection-item">
-
- 			      <span class="badge"> <div id='unfairAdvantage' class="chip" ></div></span>
- 			      <p class="title"><b>Unfair Advantage</b></p>
- 			      <p>Why this team to build this thing, and why now?</p>
-
- 			    </li>
-
+ 			{{/criterias}}
+ 			    
  		  </ul>
+ 			
 
 
 
 	</div>
   </div>
+
+
+
