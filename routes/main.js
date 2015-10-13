@@ -160,7 +160,23 @@ exports.addComp = function (req, res, next){
 }
 
 exports.judge = function (req, res){
-    res.render('judgeComp');
+    req.getConnection(function(err, connection){
+      
+          connection.query('select * from competition_criteria where competition_id=1', function(err, criterias) {
+               
+               criterias.forEach(function(cri){
+                    if(cri.elemID == undefined){
+                      cri.elemID = cri.name.replace(/ /g,'')
+                    }
+                    else{
+                      cri.elemID = cri.name.replace(/ /g,'')
+                    }
+                    
+                });
+                res.render('judgeComp',{criterias:criterias});
+          });
+
+      });
 
 }
 
