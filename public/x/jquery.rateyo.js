@@ -25,9 +25,9 @@
 
   var DEFAULTS = {
 
-    starWidth: "32px",
+    starWidth: "30px",
     normalFill: "grey",
-    ratedFill: "#f39c12",
+    ratedFill: "orange",
     numStars: 5,
     maxValue: 5,
     precision: 1,
@@ -35,7 +35,7 @@
     fullStar: false,
     halfStar: false,
     readOnly: false,
-    spacing: "0px",
+    spacing: "15px",
     onChange: null,
     onSet: null
   };

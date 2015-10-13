@@ -77,3 +77,8 @@ nav .brand-logo {
 .feedback{
    display: none;
 }
+
+
+@media only screen and (max-device-width: 480px) {
+       .startupInfo{display:none;}
+  }

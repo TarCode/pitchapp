@@ -3,17 +3,81 @@
 
 	<div class='col s12 m3 profile'>
 			{{#startup}}
-	      <img class = "responsive-img circle" src = "{{image_url}}">
-	      <h4> {{name}}</h4>
-	      <h6> {{location}} </h6>
-	      <h7> The most delicious apps in the indutry</h7>
-	      <div class="collection">
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Stage &nbsp </span><br><br>{{stage}}</a>
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Industry</span><br><br>{{industry}} </a>
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Sector</span><br><br>{{sector}}</a>
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Employees</span><br><br>{{employees}}</span></a>
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Turnover</span><br><br>{{turnover}}</a>
+	      
+	   
+	     
+	      
+
+
+	      <div class="row ">
+	        <div class="col s12 m12">
+	          <div class="card">
+	            <div class="card-image">
+	              <img class = "responsive-img circle" src = "{{image_url}}">
+	              <span class="card-title">{{name}}</span>
+	            </div>
+	            <div class="card-content">
+	              <p> The most delicious apps in the indutry</p>
+	            </div>
+	            <div class="card-action ">
+	               <span class='chip'> {{location}} </span>
+	               <span class='chip'> www.likeAleek.com </span>
+	            </div>
+	           
+	              	
+	              		
+					  
+					    <div class='card-action startupInfo lighten-3'>
+
+					          
+					          <span class="chip lighten-1">
+					                 <img src="/img/stage.png" alt="Contact Person">
+					                 {{stage}} 
+					                 <span class='title'>Stage</span>
+					          		
+					          </span>
+					    </div>
+					    <div class='card-action startupInfo'>
+					          
+					          <span class="chip lighten-1">
+					                 <img src="/img/ind.png" alt="Contact Person">
+					                 {{industry}} 
+					                 <span class='title'>Industry</span>
+					          		
+					          </span>
+					          
+					    </div>
+					     <div class='card-action startupInfo'>
+					     	  <span class="chip lighten-1">
+
+					     	    <img src="/img/sector.png" alt="Contact Person">
+					     	    <span class='title'>Sector</span>
+					     	  	{{sector}} 
+					     	  	 
+					     	  </span>
+					         
+					          
+					         
+					    </div>
+					     <div class='card-action startupInfo'>
+					          <span class="chip lighten-1">
+					                <img src="/img/em.png" alt="Contact Person">
+					          		{{employees}} 
+					          		<span class='title'>Employees </span>
+
+					           </span>
+					     </div>
+					       
+					    
+					  
+				       
+			  
+	         
+	          </div>
+	        </div>
 	      </div>
+
+	      
 			{{/startup}}
 	  </div>
 
@@ -32,7 +96,7 @@
 
 
 
- 			      <p>Overall Startup Score &nbsp <span class='chip form-control' id='totalScore'></span></p>
+ 			      <p>Overall Startup Score &nbsp <span class='chip teal lighten-4 form-control' id='totalScore'> No Score yet  </span></p>
  			      <button class="btn waves-effect waves-dark orange " type="submit" name="action">Submit
 				    <i class="material-icons right">send</i>
 				  </button>
@@ -43,19 +107,24 @@
 	      		<script type="text/javascript">
 	      			addCriteria('{{elemID}}')
 	      		</script>
- 			    <li class="collection-item">
+ 			    <li class="collection-item col s12">
 
- 			      <span class="badge"> <div id='{{elemID}}' class="chip rate"></div></span>
- 			      <p class="title"><b>{{name}}</b></p>
- 			      <p>{{description}}</p>
- 			      <button class='btn blue lighten-2 giveFeedback' >Give Feedback</button>
+ 			      
+ 			      <p class="title col s12"><b>{{name}}</b></p>
+ 			      <p class='col s12'>{{description}}</p>
+
+ 			      <span class="col s12 btn white "> <div id='{{elemID}}' class="chip rate "></div></span>
+ 			      <button class='col s12 btn blue lighten-2 giveFeedback' >Give Feedback</button>
+ 			      
  			      <div class="row feedback">
+ 			        <hr>
 			        <div class="input-field white col s12">
 					           <textarea id="textarea1" class="materialize-textarea feedbackField" ></textarea>
 					           <label for="textarea1">Feedback</label>
 					 </div>
 					 <button class='btn orange submitFeedback' >Submit</button>
 			      </div>
+			      <br>
 
  			    </li>
  			{{/criterias}}

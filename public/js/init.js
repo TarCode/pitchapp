@@ -22,7 +22,7 @@
 
     $('.button-collapse').sideNav();
     $('.rate').rateYo({
-            rating: 1,
+            rating: 0,
             ratedFill:'#3498DB'
           });
     $('.rate').rateYo('option','onSet',function(rating,rateYoInstance){
