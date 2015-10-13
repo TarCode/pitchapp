@@ -33,7 +33,7 @@ var CalculateTotalScore = function(){
 	for(score in scores){
 		totalScore += parseFloat(scores[score])
 	}
-	$('#totalScore').html(totalScore)
+	$('#totalScore').html(' &nbsp '+totalScore+' &nbsp ')
 	finalScore=totalScore;
 }
 
