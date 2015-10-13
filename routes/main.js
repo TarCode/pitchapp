@@ -161,9 +161,13 @@ exports.addComp = function (req, res, next){
 
 exports.judge = function (req, res){
     req.getConnection(function(err, connection){
-      
-          connection.query('select * from competition_criteria where competition_id=1', function(err, criterias) {
-               
+          var comp_id = req.params.competition_id;
+          var startup_id = req.params.startup_id;
+          connection.query('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.startup_id = ?',[startup_id], function(err, startup) {
+            if( err )console.log(err);
+
+              connection.query('SELECT * FROM competition_criteria WHERE competition_id = ?',[comp_id], function(err, criterias) {
+
                criterias.forEach(function(cri){
                     if(cri.elemID == undefined){
                       cri.elemID = cri.name.replace(/ /g,'')
@@ -171,11 +175,11 @@ exports.judge = function (req, res){
                     else{
                       cri.elemID = cri.name.replace(/ /g,'')
                     }
-                    
-                });
-                res.render('judgeComp',{criterias:criterias});
-          });
 
+                });
+                res.render('judgeComp',{criterias:criterias, startup:startup[0]});
+              });
+        });
       });
 
 }

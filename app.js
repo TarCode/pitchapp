@@ -11,8 +11,8 @@ var app = express();
 
 var dbOptions = {
      host: 'localhost',
-      user: 'root',
-      password: 'theaya5379',
+      user: 'tarcode',
+      password: 'coder123',
       port: 3306,
       database: 'pitchapp'
 };
@@ -42,7 +42,7 @@ app.get('/startup/new/:id', main.newStartup);
 app.post('/startup/new/add/:id', main.addStartup);
 
 
-app.get('/judge', main.judge);
+app.get('/judge/:competition_id/:startup_id', main.judge);
 
 
 

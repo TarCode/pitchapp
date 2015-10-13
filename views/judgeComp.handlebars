@@ -2,19 +2,19 @@
 <div class='row'>
 
 	<div class='col s12 m3 profile'>
-
-	      <img class = "responsive-img circle" src = "./img/startup3.png">
-	      <h4> Buber</h4>
-	      <h6> Located in Cape Town </h6>
+			{{#startup}}
+	      <img class = "responsive-img circle" src = "{{image_url}}">
+	      <h4> {{name}}</h4>
+	      <h6> {{location}} </h6>
 	      <h7> The most delicious apps in the indutry</h7>
 	      <div class="collection">
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Stage &nbsp </span><br><br>Start Up Company</a>
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Industry</span><br><br>Software </a>
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Location</span><br><br>Cape Town</a>
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Founded</span><br><br>3 Mar 15</span></a>
-	        <a href="#!" class="collection-item"><span class='btn col s12'>Website</span><br><br>buber.com </a>
+	        <a href="#!" class="collection-item"><span class='btn col s12'>Stage &nbsp </span><br><br>{{stage}}</a>
+	        <a href="#!" class="collection-item"><span class='btn col s12'>Industry</span><br><br>{{industry}} </a>
+	        <a href="#!" class="collection-item"><span class='btn col s12'>Sector</span><br><br>{{sector}}</a>
+	        <a href="#!" class="collection-item"><span class='btn col s12'>Employees</span><br><br>{{employees}}</span></a>
+	        <a href="#!" class="collection-item"><span class='btn col s12'>Turnover</span><br><br>{{turnover}}</a>
 	      </div>
-
+			{{/startup}}
 	  </div>
 
 
@@ -24,14 +24,14 @@
 
   	</div>
 
-    
+
   	<div class='col s12 m8'>
-  		
+
       <ul class="collection">
       		<li class="collection-item active">
 
- 			      
- 			     
+
+
  			      <p>Overall Startup Score &nbsp <span class='chip form-control' id='totalScore'></span></p>
  			      <button class="btn waves-effect waves-dark orange " type="submit" name="action">Submit
 				    <i class="material-icons right">send</i>
@@ -39,8 +39,8 @@
  			    </li>
 
       		{{#criterias}}
-      		
-	      		<script type="text/javascript">      			
+
+	      		<script type="text/javascript">
 	      			addCriteria('{{elemID}}')
 	      		</script>
  			    <li class="collection-item">
@@ -59,14 +59,11 @@
 
  			    </li>
  			{{/criterias}}
- 			    
+
  		  </ul>
- 			
+
 
 
 
 	</div>
   </div>
-
-
-
