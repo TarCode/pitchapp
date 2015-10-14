@@ -11,8 +11,8 @@ var app = express();
 
 var dbOptions = {
      host: 'localhost',
-      user: 'root',
-      password: 'theaya5379',
+      user: 'tarcode',
+      password: 'coder123',
       port: 3306,
       database: 'pitchapp'
 };
@@ -27,17 +27,16 @@ app.use(bodyParser.json());
 //app.use(session({secret: "bookworms", cookie: {maxAge: 120000}, resave:true, saveUninitialized: false}));
 
 app.get('/', main.land);
-app.get('/org/compList', main.showOrgList);
-app.get('/startup/compList', main.showStartupList);
 
+app.get('/org/compList', main.showOrgList);
 app.get('/org/comp/new', main.newComp);
 app.post('/org/comp/new/add', main.addComp);
-
 app.get('/org/comp/:id', main.comp);
-app.get('/startup/comp/:id', main.startupComp);
 app.get('/org/comp/delete/:id', main.delComp);
 app.get('/org/startup/delete/:id', main.delStartup);
 
+app.get('/startup/compList', main.showStartupList);
+app.get('/startup/comp/:id', main.startupComp);
 app.get('/startup/new/:id', main.newStartup);
 app.post('/startup/new/add/:id', main.addStartup);
 
