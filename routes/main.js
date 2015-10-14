@@ -166,7 +166,7 @@ exports.judge = function (req, res){
           connection.query('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.startup_id = ?',[startup_id], function(err, startup) {
             if( err )console.log(err);
 
-              connection.query('SELECT * FROM competition_criteria WHERE competition_id = ?',[comp_id], function(err, criterias) {
+              connection.query('SELECT * FROM criteria WHERE competition_id = ?',[comp_id], function(err, criterias) {
 
                criterias.forEach(function(cri){
                     if(cri.elemID == undefined){

@@ -1,14 +1,6 @@
-
 <div class='row'>
-
 	<div class='col s12 m3 profile'>
 			{{#startup}}
-	      
-	   
-	     
-	      
-
-
 	      <div class="row ">
 	        <div class="col s12 m12">
 	          <div class="card">
@@ -20,119 +12,74 @@
 	              <p> The most delicious apps in the indutry</p>
 	            </div>
 	            <div class="card-action ">
-	               <span class='chip'> {{location}} </span>
-	               <span class='chip'> www.likeAleek.com </span>
+               <span class='chip'> {{location}} </span>
+               <span class='chip'> www.likeAleek.com </span>
 	            </div>
-	           
-	              	
-	              		
-					  
-					    <div class='card-action startupInfo lighten-3'>
-
-					          
-					          <span class="chip lighten-1">
-					                 <img src="/img/stage.png" alt="Contact Person">
-					                 {{stage}} 
-					                 <span class='title'>Stage</span>
-					          		
-					          </span>
+		    			<div class='card-action startupInfo lighten-3'>
+			          <span class="chip lighten-1">
+                 <img src="/img/stage.png" alt="Contact Person">
+                 {{stage}}
+                 <span class='title'>Stage</span>
+			          </span>
 					    </div>
 					    <div class='card-action startupInfo'>
-					          
-					          <span class="chip lighten-1">
-					                 <img src="/img/ind.png" alt="Contact Person">
-					                 {{industry}} 
-					                 <span class='title'>Industry</span>
-					          		
-					          </span>
-					          
+			          <span class="chip lighten-1">
+                 <img src="/img/ind.png" alt="Contact Person">
+                 {{industry}}
+                 <span class='title'>Industry</span>
+			          </span>
 					    </div>
 					     <div class='card-action startupInfo'>
-					     	  <span class="chip lighten-1">
-
-					     	    <img src="/img/sector.png" alt="Contact Person">
-					     	    <span class='title'>Sector</span>
-					     	  	{{sector}} 
-					     	  	 
-					     	  </span>
-					         
-					          
-					         
+				     	  <span class="chip lighten-1">
+				     	    <img src="/img/sector.png" alt="Contact Person">
+				     	    <span class='title'>Sector</span>
+				     	  	{{sector}}
+				     	  </span>
 					    </div>
 					     <div class='card-action startupInfo'>
-					          <span class="chip lighten-1">
-					                <img src="/img/em.png" alt="Contact Person">
-					          		{{employees}} 
-					          		<span class='title'>Employees </span>
-
-					           </span>
+			          <span class="chip lighten-1">
+	                <img src="/img/em.png" alt="Contact Person">
+		          		{{employees}}
+		          		<span class='title'>Employees </span>
+		           	</span>
 					     </div>
-					       
-					    
-					  
-				       
-			  
-	         
 	          </div>
 	        </div>
 	      </div>
-
-	      
 			{{/startup}}
 	  </div>
-
-
   	<div class='col s12 m8 vidContent'>
-
   		<iframe src="//www.slideshare.net/slideshow/embed_code/key/qAzwgPFPSRmCh9" class="video" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/sallyjenkinson/an-introduction-to-open-data-53732088" title="An introduction to open data" target="_blank">An introduction to open data</a> </strong> from <strong><a href="//www.slideshare.net/sallyjenkinson" target="_blank">Sally Jenkinson</a></strong> </div>
-
   	</div>
-
-
   	<div class='col s12 m8'>
-
       <ul class="collection">
-      		<li class="collection-item active">
+    		<li class="collection-item active">
+			      <p>Overall Startup Score &nbsp <span class='chip teal lighten-4 form-control' id='totalScore'> No Score yet  </span></p>
+			      <button class="btn waves-effect waves-dark orange " type="submit" name="action">Submit
+			    	<i class="material-icons right">send</i>
+			  	</button>
+			    </li>
+    		{{#criterias}}
+    		<script type="text/javascript">
+    			addCriteria('{{elemID}}')
+    		</script>
+		    <li class="collection-item col s12">
+		      <p class="title col s12"><b>{{name}}</b></p>
+		      <p class='col s12'>{{description}}</p>
+		      <span class="col s12 btn white "> <div id='{{elemID}}' class="chip rate "></div></span>
+		      <button class='col s12 btn blue lighten-2 giveFeedback' >Give Feedback</button>
+		      <div class="row feedback">
+		        <hr>
+        	<div class="input-field white col s12">
+           <textarea id="textarea1" class="materialize-textarea feedbackField" ></textarea>
+           <label for="textarea1">Feedback</label>
+		 			</div>
+			 		<button class='btn orange submitFeedback' >Submit</button>
+	      </div>
+	      <br>
 
-
-
- 			      <p>Overall Startup Score &nbsp <span class='chip teal lighten-4 form-control' id='totalScore'> No Score yet  </span></p>
- 			      <button class="btn waves-effect waves-dark orange " type="submit" name="action">Submit
-				    <i class="material-icons right">send</i>
-				  </button>
- 			    </li>
-
-      		{{#criterias}}
-
-	      		<script type="text/javascript">
-	      			addCriteria('{{elemID}}')
-	      		</script>
- 			    <li class="collection-item col s12">
-
- 			      
- 			      <p class="title col s12"><b>{{name}}</b></p>
- 			      <p class='col s12'>{{description}}</p>
-
- 			      <span class="col s12 btn white "> <div id='{{elemID}}' class="chip rate "></div></span>
- 			      <button class='col s12 btn blue lighten-2 giveFeedback' >Give Feedback</button>
- 			      
- 			      <div class="row feedback">
- 			        <hr>
-			        <div class="input-field white col s12">
-					           <textarea id="textarea1" class="materialize-textarea feedbackField" ></textarea>
-					           <label for="textarea1">Feedback</label>
-					 </div>
-					 <button class='btn orange submitFeedback' >Submit</button>
-			      </div>
-			      <br>
-
- 			    </li>
- 			{{/criterias}}
-
+		    </li>
+				{{/criterias}}
  		  </ul>
-
-
-
-
 	</div>
-  </div>
+</div>
