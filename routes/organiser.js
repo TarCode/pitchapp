@@ -27,36 +27,34 @@ this.showOrgList = function(req, res, next){
 
   }
   this.addComp = function (req, res, next){
-    req.getConnection(function(err, connection){
-     if (err)  console.log(err);
-     var input = JSON.parse(JSON.stringify(req.body));
-     var data = {
-       name: input.comp_name,
-       image_url: "/img/"+input.image_url,
-       organizer: input.comp_name,
-       entrants: input.entries,
-       description: input.desc,
-       location: input.location,
-       date: input.date,
-       start_time: input.start_time,
-       end_time: input.end_time
-     }
-        connection.query('INSERT INTO competition SET ?', [data], function(err, results) {
-            if (err) console.log(err);
-            res.redirect('/compList');
+    req.services(function(err, services){
+    		var organiserDataServ = services.organiserDataServ;
+        var input = JSON.parse(JSON.stringify(req.body));
+        var data = {
+          name: input.comp_name,
+          image_url: "/img/"+input.image_url,
+          organizer: input.comp_name,
+          entrants: input.entries,
+          description: input.desc,
+          location: input.location,
+          date: input.date,
+          start_time: input.start_time,
+          end_time: input.end_time
+        }
+        organiserDataServ.insertCompetition(data, function(err, rows){
+          if(err)	throw err;
+          res.redirect('/compList');
         });
-
     });
   }
 
 this.comp = function (req, res, next){
-  req.getConnection(function(err, connection){
-   if (err)
-       return next(err);
-            var comp_id = req.params.id;
-            connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time FROM competition WHERE id = ?', [comp_id], function(err, results) {
+  req.services(function(err, services){
+   var organiserDataServ = services.organiserDataServ;
+            var data = req.params.id;
+            organiserDataServ.getCompInfo(data, function(err, results){
                 if (err) return next(err);
-                connection.query('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.competition_id = ?', [comp_id], function(err, results1) {
+                organiserDataServ.getEntrantInfo(data, function(err, results1){
                     if (err) return next(err);
                   res.render('compProfile',  {comp:results,
                                               entrants: results1});
