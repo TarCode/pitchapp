@@ -9,7 +9,7 @@ var express = require('express'),
     StartupMethods = require('./routes/startup'),
 
     OrganiserDataService = require('./dataServices/organiserDataService'),
-
+    JudgeDataService = require('./dataServices/judgeDataService'),
     ConnectionProvider = require('./routes/connectionProvider');
     //session = require('express-session');
 
@@ -18,17 +18,17 @@ var app = express();
 
 var dbOptions = {
      host: 'localhost',
-      user: 'tarcode',
-      password: 'coder123',
+      user: 'root',
+      password: 'theaya5379',
       port: 3306,
       database: 'pitchapp'
 };
 
 var serviceSetupCallback = function(connection){
 	return {
-		organiserDataServ : new OrganiserDataService(connection)
+		organiserDataServ : new OrganiserDataService(connection),
     //startupDataServ : new startupDataService(connection),
-    //judgeDataServ : new judgeDataService(connection)
+    judgeDataServ : new JudgeDataService(connection)
 	}
 };
 
@@ -60,8 +60,9 @@ app.get('/startup/comp/:id', StartupMethods.startupComp);
 app.get('/startup/new/:id', StartupMethods.newStartup);
 app.post('/startup/new/add/:id', StartupMethods.addStartup);
 
+var judge = new JudgeMethods();
 
-app.get('/judge/:competition_id/:startup_id', JudgeMethods.judge);
+app.get('/judge/:competition_id/:startup_id', judge.judge);
 
 
 
