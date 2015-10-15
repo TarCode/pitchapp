@@ -3,7 +3,14 @@ var express = require('express'),
     exphbs  = require('express-handlebars'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
-    main = require('./routes/main');
+
+    OrganiserMethods = require('./routes/organiser'),
+    JudgeMethods = require('./routes/judge'),
+    StartupMethods = require('./routes/startup'),
+
+    OrganiserDataService = require('./dataServices/organiserDataService'),
+
+    ConnectionProvider = require('./routes/connectionProvider');
     //session = require('express-session');
 
 
@@ -17,31 +24,44 @@ var dbOptions = {
       database: 'pitchapp'
 };
 
+var serviceSetupCallback = function(connection){
+	return {
+		organiserDataServ : new OrganiserDataService(connection)
+    //startupDataServ : new startupDataService(connection),
+    //judgeDataServ : new judgeDataService(connection)
+	}
+};
+
+var myConnectionProvider = new ConnectionProvider(dbOptions, serviceSetupCallback);
+app.use(myConnectionProvider.setupProvider);
+app.use(myConnection(mysql, dbOptions, 'pool'));
+
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 app.use(express.static('public'));
-app.use(myConnection(mysql, dbOptions, 'single'));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //app.use(session({secret: "bookworms", cookie: {maxAge: 120000}, resave:true, saveUninitialized: false}));
 
-app.get('/', main.land);
+app.get('/', StartupMethods.land);
 
-app.get('/org/compList', main.showOrgList);
-app.get('/org/comp/new', main.newComp);
-app.post('/org/comp/new/add', main.addComp);
-app.get('/org/comp/:id', main.comp);
-app.get('/org/comp/delete/:id', main.delComp);
-app.get('/org/startup/delete/:id', main.delStartup);
+var organiser = new OrganiserMethods();
+app.get('/org/compList', organiser.showOrgList);
+app.get('/org/comp/new', organiser.newComp);
+app.post('/org/comp/new/add', organiser.addComp);
+app.get('/org/comp/:id', organiser.comp);
+app.get('/org/comp/delete/:id', organiser.delComp);
+app.get('/org/startup/delete/:id', organiser.delStartup);
 
-app.get('/startup/compList', main.showStartupList);
-app.get('/startup/comp/:id', main.startupComp);
-app.get('/startup/new/:id', main.newStartup);
-app.post('/startup/new/add/:id', main.addStartup);
+app.get('/startup/compList', StartupMethods.showStartupList);
+app.get('/startup/comp/:id', StartupMethods.startupComp);
+app.get('/startup/new/:id', StartupMethods.newStartup);
+app.post('/startup/new/add/:id', StartupMethods.addStartup);
 
 
-app.get('/judge/:competition_id/:startup_id', main.judge);
+app.get('/judge/:competition_id/:startup_id', JudgeMethods.judge);
 
 
 
