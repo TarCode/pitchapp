@@ -23,4 +23,7 @@ module.exports = function (connection) {
       insertData('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.competition_id = ?', data, cb );
   };
 
+  this.deleteComp = function (data, cb) {
+      insertData('DELETE FROM competition WHERE id = ?', data, cb );
+  };
 };

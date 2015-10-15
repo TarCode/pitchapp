@@ -43,7 +43,7 @@ this.showOrgList = function(req, res, next){
         }
         organiserDataServ.insertCompetition(data, function(err, rows){
           if(err)	throw err;
-          res.redirect('/compList');
+          res.redirect('/org/compList');
         });
     });
   }
@@ -66,12 +66,12 @@ this.comp = function (req, res, next){
 
 
 this.delComp = function (req, res, next){
-  req.getConnection(function(err, connection){
-   if (err)  console.log(err);
+  req.services(function(err, services){
+    var organiserDataServ = services.organiserDataServ;
       var comp_id = req.params.id;
-      connection.query('DELETE FROM competition WHERE id = ?', [comp_id], function(err, results) {
+      organiserDataServ.deleteComp(comp_id, function(err){
           if (err) console.log(err);
-          res.redirect('/compList');
+          res.redirect('/org/compList');
       });
 
   });
