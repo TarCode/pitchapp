@@ -26,4 +26,16 @@ module.exports = function (connection) {
   this.deleteComp = function (data, cb) {
       insertData('DELETE FROM competition WHERE id = ?', data, cb );
   };
+
+  this.getCompId = function(data, cb){
+    insertData('SELECT competition_id FROM entrants WHERE startup_id = ?', data, cb);
+  };
+
+  this.deleteStartup = function(data, cb){
+    insertData('DELETE FROM startup WHERE id = ?', data, cb);
+  };
+
+  this.deleteEntrant = function(data, cb){
+    insertData('DELETE FROM entrants WHERE startup_id = ?',data, cb)
+  };
 };

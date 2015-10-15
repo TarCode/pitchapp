@@ -78,15 +78,15 @@ this.delComp = function (req, res, next){
 }
 
 this.delStartup = function (req, res, next){
-  req.getConnection(function(err, connection){
-   if (err)  console.log(err);
+  req.services(function(err, services){
+    var organiserDataServ = services.organiserDataServ;
       var startup_id = req.params.id;
-      connection.query('SELECT competition_id FROM entrants WHERE startup_id = ?', [startup_id], function(err, comp_id) {
+      organiserDataServ.getCompId(startup_id, function(err, comp_id) {
           if (err) console.log(err);
           var comp_id = comp_id[0].competition_id;
-          connection.query('DELETE FROM startup WHERE id = ?', [startup_id], function(err, results) {
+          organiserDataServ.deleteStartup(startup_id, function(err, results) {
               if (err) console.log(err);
-              connection.query('DELETE FROM entrants WHERE startup_id = ?', [startup_id], function(err, results) {
+              organiserDataServ.deleteEntrant(startup_id, function(err, results) {
                   if (err) console.log(err);
                 res.redirect('/org/comp/'+comp_id+"#entrants");
               });
