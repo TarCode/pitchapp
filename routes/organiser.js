@@ -2,31 +2,31 @@
 var count = 0;
 var user = {};
 lock = false;
-
+module.exports = function(){
 //log user in or redirect
-exports.land = function (req, res){
+this.land = function (req, res){
     res.render('land');
 
 }
 
-exports.showOrgList = function(req, res, next){
-      req.getConnection(function(err, connection){
-       if (err)
-           return next(err);
-
-                connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time  FROM competition', [], function(err, results) {
-                    if (err) return next(err);
-                 res.render('orgList',  {comp:results});
+this.showOrgList = function(req, res, next){
+  req.services(function(err, services){
+    		var organiserDataServ = services.organiserDataServ;
+        organiserDataServ.getAllCompetitions(function(err, rows){
+          if(err)	throw err;
+            res.render( 'orgList', {
+                comp : rows
             });
+        });
 
-    });
-  };
+  });
+}
 
-  exports.newComp = function (req, res){
+  this.newComp = function (req, res){
       res.render('newComp');
 
   }
-  exports.addComp = function (req, res, next){
+  this.addComp = function (req, res, next){
     req.getConnection(function(err, connection){
      if (err)  console.log(err);
      var input = JSON.parse(JSON.stringify(req.body));
@@ -48,8 +48,8 @@ exports.showOrgList = function(req, res, next){
 
     });
   }
-  
-exports.comp = function (req, res, next){
+
+this.comp = function (req, res, next){
   req.getConnection(function(err, connection){
    if (err)
        return next(err);
@@ -67,7 +67,7 @@ exports.comp = function (req, res, next){
 }
 
 
-exports.delComp = function (req, res, next){
+this.delComp = function (req, res, next){
   req.getConnection(function(err, connection){
    if (err)  console.log(err);
       var comp_id = req.params.id;
@@ -79,7 +79,7 @@ exports.delComp = function (req, res, next){
   });
 }
 
-exports.delStartup = function (req, res, next){
+this.delStartup = function (req, res, next){
   req.getConnection(function(err, connection){
    if (err)  console.log(err);
       var startup_id = req.params.id;
@@ -276,4 +276,5 @@ exports.checkUser = function (req, res, next) {
             }
         });
     });
+}
 }
