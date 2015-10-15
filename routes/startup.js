@@ -9,18 +9,6 @@ exports.land = function (req, res){
 
 }
 
-exports.showOrgList = function(req, res, next){
-      req.getConnection(function(err, connection){
-       if (err)
-           return next(err);
-
-                connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time  FROM competition', [], function(err, results) {
-                    if (err) return next(err);
-                 res.render('orgList',  {comp:results});
-            });
-
-    });
-  };
   exports.showStartupList = function(req, res, next){
         req.getConnection(function(err, connection){
          if (err)
@@ -71,22 +59,6 @@ exports.addStartup = function (req, res, next){
 
   });
 }
-exports.comp = function (req, res, next){
-  req.getConnection(function(err, connection){
-   if (err)
-       return next(err);
-            var comp_id = req.params.id;
-            connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time FROM competition WHERE id = ?', [comp_id], function(err, results) {
-                if (err) return next(err);
-                connection.query('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.competition_id = ?', [comp_id], function(err, results1) {
-                    if (err) return next(err);
-                  res.render('compProfile',  {comp:results,
-                                              entrants: results1});
-                });
-            });
-
-  });
-}
 
 exports.startupComp = function (req, res, next){
   req.getConnection(function(err, connection){
@@ -99,89 +71,6 @@ exports.startupComp = function (req, res, next){
         });
 
   });
-}
-
-exports.delComp = function (req, res, next){
-  req.getConnection(function(err, connection){
-   if (err)  console.log(err);
-      var comp_id = req.params.id;
-      connection.query('DELETE FROM competition WHERE id = ?', [comp_id], function(err, results) {
-          if (err) console.log(err);
-          res.redirect('/compList');
-      });
-
-  });
-}
-
-exports.delStartup = function (req, res, next){
-  req.getConnection(function(err, connection){
-   if (err)  console.log(err);
-      var startup_id = req.params.id;
-      connection.query('SELECT competition_id FROM entrants WHERE startup_id = ?', [startup_id], function(err, comp_id) {
-          if (err) console.log(err);
-          var comp_id = comp_id[0].competition_id;
-          connection.query('DELETE FROM startup WHERE id = ?', [startup_id], function(err, results) {
-              if (err) console.log(err);
-              connection.query('DELETE FROM entrants WHERE startup_id = ?', [startup_id], function(err, results) {
-                  if (err) console.log(err);
-                res.redirect('/org/comp/'+comp_id+"#entrants");
-              });
-          });
-      });
-
-  });
-}
-
-exports.newComp = function (req, res){
-    res.render('newComp');
-
-}
-exports.addComp = function (req, res, next){
-  req.getConnection(function(err, connection){
-   if (err)  console.log(err);
-   var input = JSON.parse(JSON.stringify(req.body));
-   var data = {
-     name: input.comp_name,
-     image_url: "/img/"+input.image_url,
-     organizer: input.comp_name,
-     entrants: input.entries,
-     description: input.desc,
-     location: input.location,
-     date: input.date,
-     start_time: input.start_time,
-     end_time: input.end_time
-   }
-      connection.query('INSERT INTO competition SET ?', [data], function(err, results) {
-          if (err) console.log(err);
-          res.redirect('/compList');
-      });
-
-  });
-}
-
-exports.judge = function (req, res){
-    req.getConnection(function(err, connection){
-          var comp_id = req.params.competition_id;
-          var startup_id = req.params.startup_id;
-          connection.query('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.startup_id = ?',[startup_id], function(err, startup) {
-            if( err )console.log(err);
-
-              connection.query('SELECT * FROM criteria WHERE competition_id = ?',[comp_id], function(err, criterias) {
-
-               criterias.forEach(function(cri){
-                    if(cri.elemID == undefined){
-                      cri.elemID = cri.name.replace(/ /g,'')
-                    }
-                    else{
-                      cri.elemID = cri.name.replace(/ /g,'')
-                    }
-
-                });
-                res.render('judgeComp',{criterias:criterias, startup:startup[0]});
-              });
-        });
-      });
-
 }
 
 //log user in or redirect

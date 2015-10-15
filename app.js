@@ -3,7 +3,9 @@ var express = require('express'),
     exphbs  = require('express-handlebars'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
-    main = require('./routes/main');
+    organiser = require('./routes/organiser'),
+    judge = require('./routes/judge'),
+    startup = require('./routes/startup');
     //session = require('express-session');
 
 
@@ -26,22 +28,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //app.use(session({secret: "bookworms", cookie: {maxAge: 120000}, resave:true, saveUninitialized: false}));
 
-app.get('/', main.land);
+app.get('/', startup.land);
 
-app.get('/org/compList', main.showOrgList);
-app.get('/org/comp/new', main.newComp);
-app.post('/org/comp/new/add', main.addComp);
-app.get('/org/comp/:id', main.comp);
-app.get('/org/comp/delete/:id', main.delComp);
-app.get('/org/startup/delete/:id', main.delStartup);
+app.get('/org/compList', organiser.showOrgList);
+app.get('/org/comp/new', organiser.newComp);
+app.post('/org/comp/new/add', organiser.addComp);
+app.get('/org/comp/:id', organiser.comp);
+app.get('/org/comp/delete/:id', organiser.delComp);
+app.get('/org/startup/delete/:id', organiser.delStartup);
 
-app.get('/startup/compList', main.showStartupList);
-app.get('/startup/comp/:id', main.startupComp);
-app.get('/startup/new/:id', main.newStartup);
-app.post('/startup/new/add/:id', main.addStartup);
+app.get('/startup/compList', startup.showStartupList);
+app.get('/startup/comp/:id', startup.startupComp);
+app.get('/startup/new/:id', startup.newStartup);
+app.post('/startup/new/add/:id', startup.addStartup);
 
 
-app.get('/judge/:competition_id/:startup_id', main.judge);
+app.get('/judge/:competition_id/:startup_id', judge.judge);
 
 
 
