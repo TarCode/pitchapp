@@ -10,6 +10,7 @@ var express = require('express'),
 
     OrganiserDataService = require('./dataServices/organiserDataService'),
     JudgeDataService = require('./dataServices/judgeDataService'),
+    startupDataService = require('./dataServices/startupDataService'),
     ConnectionProvider = require('./routes/connectionProvider');
     //session = require('express-session');
 
@@ -27,7 +28,7 @@ var dbOptions = {
 var serviceSetupCallback = function(connection){
 	return {
 		organiserDataServ : new OrganiserDataService(connection),
-    //startupDataServ : new startupDataService(connection),
+    startupDataServ : new startupDataService(connection),
     judgeDataServ : new JudgeDataService(connection)
 	}
 };
