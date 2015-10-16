@@ -9,17 +9,18 @@ exports.land = function (req, res){
 
 }
 
-  exports.showStartupList = function(req, res, next){
-        req.getConnection(function(err, connection){
-         if (err)
-             return next(err);
-
-                  connection.query('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time  FROM competition', [], function(err, results) {
-                      if (err) return next(err);
-                   res.render('startupList',  {comp:results});
+  exports.showStartupList = function(req, res){
+        
+        req.services(function(err,services){
+           var startupService = services.startupDataServ;
+           startupService.getStartups(function(err, results) {
+                  if (err) return next(err);
+                  res.render('startupList',  {comp:results});
               });
+         })
+                 
 
-      });
+
     };
 
 exports.newStartup = function (req, res){
@@ -28,36 +29,45 @@ exports.newStartup = function (req, res){
 }
 
 exports.addStartup = function (req, res, next){
-  req.getConnection(function(err, connection){
-   if (err)  console.log(err);
-   var input = JSON.parse(JSON.stringify(req.body));
-   var data = {
-     name: input.startup_name,
-     image_url: "/img/"+input.image_url,
-     location: input.location,
-     industry: input.industry,
-     sector: input.sector,
-     employees: input.employees,
-     stage: input.stage,
-     turnover: input.turnover
-   }
 
-      connection.query('INSERT INTO startup SET ?', [data], function(err, results) {
-        if (err) console.log(err);
-          connection.query('SELECT id FROM startup WHERE name = ?', [data.name], function(err, startup_id) {
-            if (err) console.log(err);
-            var entryData = {
-              startup_id : startup_id[0].id,
-              competition_id : req.params.id
-            }
-            connection.query('INSERT INTO entrants SET ?', [entryData], function(err, results) {
+      req.services(function(err,services){
+          var startupService = services.startupDataServ;
+        
+           
+           if (err)  console.log(err);
+           var input = JSON.parse(JSON.stringify(req.body));
+           var data = {
+
+                         name: input.startup_name,
+                         image_url: "/img/"+input.image_url,
+                         location: input.location,
+                         industry: input.industry,
+                         sector: input.sector,
+                         employees: input.employees,
+                         stage: input.stage,
+                         turnover: input.turnover
+
+                      }
+
+          startupService.addStartup(data, function(err, results) {
               if (err) console.log(err);
-              res.redirect('/startup/compList');
-            });
-          });
-      });
 
-  });
+                  var entryData = { name :data.name, competition_id : req.params.id }
+
+
+                  startupService.enter(entryData, function(err, results) {
+                     if (err) console.log(err);
+
+                      res.redirect('/startup/compList');
+
+                  });
+          });
+           
+
+
+      })
+
+          
 }
 
 exports.startupComp = function (req, res, next){

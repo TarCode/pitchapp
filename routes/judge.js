@@ -3,16 +3,17 @@ var count = 0;
 var user = {};
 lock = false;
 
-//log user in or redirect
+module.exports = function(){
 
-exports.judge = function (req, res){
-    req.getConnection(function(err, connection){
+   this.judge=function (req, res){
+    req.services(function(err, services){
+        var judgeDataServ = services.judgeDataServ;
           var comp_id = req.params.competition_id;
           var startup_id = req.params.startup_id;
-          connection.query('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.startup_id = ?',[startup_id], function(err, startup) {
+          judgeDataServ.getEntrants(startup_id, function(err, startup) {
             if( err )console.log(err);
 
-              connection.query('SELECT * FROM criteria WHERE competition_id = ?',[comp_id], function(err, criterias) {
+             judgeDataServ.getCriteria(comp_id, function(err, criterias) {
 
                criterias.forEach(function(cri){
                     if(cri.elemID == undefined){
@@ -28,8 +29,11 @@ exports.judge = function (req, res){
         });
       });
 
+  } 
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //log user in or redirect
 exports.login = function (req, res){
     if(req.session.user ){
