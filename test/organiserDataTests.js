@@ -1,11 +1,6 @@
 var OrganiserDataService = require('../dataServices/organiserDataServicePromise');
 var assert = require("assert");
-var Connection = require('../routes/testConnectionData');
 var Promise = require("bluebird");
-
-var connection =  new Connection();
-
-connection.connect();
 
 var organiserDataService= new OrganiserDataService(connection);
 
