@@ -2,7 +2,7 @@
 
 before_script:
   - npm install
-  - mysql -u root -e 'create database pitchapp_db;'
-  - mysql -u root pitchapp_db < pitchapp.sql
+  - mysql -u root -e 'create database pitchapp_test;'
+  - mysql -u root pitchapp_test < pitchapp.sql
 
 script: mocha
