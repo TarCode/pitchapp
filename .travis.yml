@@ -1,0 +1,7 @@
+.travis.yml:
+
+before_script:
+- npm install
+- mysql -e 'create database pitchapp_test;'
+
+script: mocha
