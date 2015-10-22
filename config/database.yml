@@ -1,0 +1,5 @@
+test:
+  adapter: mysql
+  database: pitchapp_test
+  username: root
+  encoding: utf8

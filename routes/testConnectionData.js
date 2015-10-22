@@ -2,9 +2,9 @@ var mysql = require('mysql');
 
 module.exports = function () {
   return mysql.createConnection({
-          host     : 'localhost',
-          user     : 'tarcode',
-          password : 'coder123',
-          database : 'pitchapp_test'
+    host: " 127.0.0.1",
+    database: "pitchapp_test",
+    username: "root",
+    encoding: "utf8"
       });
 };
