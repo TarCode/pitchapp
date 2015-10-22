@@ -1,7 +1,8 @@
 var OrganiserDataService = require('../dataServices/organiserDataServicePromise');
 var assert = require("assert");
-var mysql = require('mysql');
+var mysql = require("mysql");
 var Promise = require("bluebird");
+
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : process.env.MYSQL_USER || 'root',
