@@ -2,6 +2,5 @@
 
 before_script:
 - npm install
-- mysql -e 'create database pitchapp_test;'
-
+- mysql -e "create database IF NOT EXISTS pitchapp_test < ./db/pitchapp.sql;" -u root
 script: mocha
