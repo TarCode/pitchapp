@@ -26,10 +26,10 @@ module.exports = function(connection){
      return queryExecutor.executeQuery('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time  FROM competition');
   };
 
-  this.insertCompetition = function (data, cb) {
-      return queryExecutor.executeQuery('INSERT INTO competition SET ?', [data], cb );
+  this.insertCompetition = function (data) {
+      return queryExecutor.executeQuery('INSERT INTO competition SET ?', data );
   };
-a
+
   this.getCompInfo = function (data, cb) {
       return queryExecutor.executeQuery('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time FROM competition WHERE id = ?', data, cb );
   };

@@ -19,8 +19,8 @@ var app = express();
 
 var dbOptions = {
      host: 'localhost',
-      user: 'root',
-      password: 'theaya5379',
+      user: 'tarcode',
+      password: 'coder123',
       port: 3306,
       database: 'pitchapp'
 };
