@@ -28,10 +28,11 @@ describe('Organiser Data Service', function(){
         .done(function(competitions){
             assert.equal(3, competitions.length);
             done();
+            after(function(done){
+              connection.query("delete from competition where id = ?", competitions.id, function(err){
+            done(err);
         });
-        after(function(done){
-          connection.query("delete from competition where id = ?", competitions.id, function(err){
-        done(err);
+
       });
     })
     });
