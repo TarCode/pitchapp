@@ -3,19 +3,19 @@ var assert = require("assert");
 var mysql = require("mysql");
 var Promise = require("bluebird");
 
-/*var connection = mysql.createConnection({
+var connection = mysql.createConnection({
   host     : 'localhost',
   user     : process.env.MYSQL_USER || 'root',
   password : "",
   database : 'pitchapp_test'
-});*/
-var connection = mysql.createConnection({
+});
+/*var connection = mysql.createConnection({
   host     : 'localhost',
   user     : process.env.MYSQL_USER || 'tarcode',
   password : "coder123",
   database : 'pitchapp_test'
 });
-
+*/
 var organiserDataService= new OrganiserDataService(connection);
 
 describe('Organiser Data Service', function(){
