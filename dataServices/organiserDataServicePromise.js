@@ -27,9 +27,9 @@ module.exports = function(connection){
   };
 
   this.insertCompetition = function (data, cb) {
-      return queryExecutor.executeQuery('INSERT INTO competition SET ?', data, cb );
+      return queryExecutor.executeQuery('INSERT INTO competition SET ?', [data], cb );
   };
-
+a
   this.getCompInfo = function (data, cb) {
       return queryExecutor.executeQuery('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time FROM competition WHERE id = ?', data, cb );
   };
