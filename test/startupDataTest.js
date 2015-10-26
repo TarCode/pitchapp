@@ -41,7 +41,7 @@ describe('Startup Data Service', function(){
       startupDataService
         .getStartups()
         .done(function(startups){          
-            assert.equal(13, startups.length);
+            assert.equal(3, startups.length);
             done();
         });
     });
@@ -57,7 +57,7 @@ describe('Startup Data Service', function(){
            startupDataService
           .getStartups()
           .done(function(startups){
-              assert.equal(14, startups.length);
+              assert.equal(4, startups.length);
               done();
           });
         }) 
@@ -98,7 +98,7 @@ describe('Startup Data Service', function(){
           startupDataService
           .getStartups()
           .done(function(competitions){
-              assert.equal(13, competitions.length);
+              assert.equal(3, competitions.length);
               done();
           });
        
