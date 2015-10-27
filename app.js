@@ -46,7 +46,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //app.use(session({secret: "bookworms", cookie: {maxAge: 120000}, resave:true, saveUninitialized: false}));
 
-app.get('/', StartupMethods.land);
+var startup = new StartupMethods();
+app.get('/', startup.land);
+app.get('/startup/compList', startup.showStartupList);
+app.get('/startup/comp/:id', startup.startupComp);
+app.get('/startup/new/:id', startup.newStartup);
+app.post('/startup/new/add/:id', startup.addStartup);
 
 var organiser = new OrganiserMethods();
 app.get('/org/compList', organiser.showOrgList);
@@ -55,11 +60,6 @@ app.post('/org/comp/new/add', organiser.addComp);
 app.get('/org/comp/:id', organiser.comp);
 app.get('/org/comp/delete/:id', organiser.delComp);
 app.get('/org/startup/delete/:id', organiser.delStartup);
-
-app.get('/startup/compList', StartupMethods.showStartupList);
-app.get('/startup/comp/:id', StartupMethods.startupComp);
-app.get('/startup/new/:id', StartupMethods.newStartup);
-app.post('/startup/new/add/:id', StartupMethods.addStartup);
 
 var judge = new JudgeMethods();
 

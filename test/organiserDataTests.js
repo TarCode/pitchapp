@@ -6,7 +6,7 @@ var Promise = require("bluebird");
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : process.env.MYSQL_USER || 'root',
-  password : "",
+  password : "coder123",
   database : 'pitchapp_test'
 });
 /*var connection = mysql.createConnection({
@@ -28,7 +28,7 @@ describe('Organiser Data Service', function(){
         });
     });
 
-    it('should insert a competition', function (done) {
+    it('should insert and delete a competition', function (done) {
       var data = {
           name: "test",
           image_url: "/img/",

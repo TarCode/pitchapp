@@ -16,7 +16,6 @@ module.exports = function(connection){
 
 
 		this.getStartups = function(cb){
-			    console.log('\t\t---getting data---')
 				getData('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time  FROM competition',cb);
 		}
 
@@ -32,17 +31,17 @@ module.exports = function(connection){
 			    askDBto('select * from startup where id = ?',data,cb)
 		}
 
-		
+
 
 		this.enter = function(data,cb){
-						
+
 			askDBto( 'SELECT id FROM startup WHERE name = ?' ,data.name,function(e,id){
-								
-					data={startup_id:id[0].id,competition_id:data.competition_id}					
-				    askDBto('INSERT INTO entrants SET ?',data,cb)	
+
+					data={startup_id:id[0].id,competition_id:data.competition_id}
+				    askDBto('INSERT INTO entrants SET ?',data,cb)
 			});
-				
-				
+
+
 		}
 
 
