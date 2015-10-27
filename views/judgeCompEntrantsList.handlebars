@@ -1,0 +1,52 @@
+<div class="section no-pad-bot" id="index-banner">
+
+</div>
+<!--CONTENT START-->
+<div class="row">
+    <!--COMP SECTION START-->
+    <div id="comp" class="col s12">
+      <div class = "container">
+
+        <!--COMPETITION START -->
+        {{#entrants}}
+        <div class="row">
+          <div class="col s3"><img class = "responsive-img circle" src = "{{image_url}}"></div>
+          <div class="col s6">
+            <span class="flow-text">{{name}}</span>
+            <br>
+            <span class="">
+              <p>Name: {{name}}
+                    <br>
+                 Location: {{location}}
+                    <br>
+                 Industry: {{industry}}
+                    <br>
+                 Sector: {{sector}}
+                    <br>
+                 Employees: {{employees}}
+                    <br>
+                 Stage: {{stage}}
+                    <br>
+                 Turnover: {{turnover}}
+              </p>
+            </span>
+          </div>
+          <div class = "col s3">
+            <a href =  "/org/startup/delete/{{startup_id}}" class="btn-floating btn-large waves-effect waves-light red listButton"><i class="material-icons">delete</i></a>
+            <a href="/judge/{{competition_id}}/{{startup_id}}" id="judgeBtn"class="judgeBtn hidden btn-floating btn-large waves-effect waves-light blue listButton">Judge</a>
+
+          </div>
+        </div>
+        <hr/>
+        {{/entrants}}
+          <!--COMPETITION END -->
+          <br><br>
+
+          <div class="section">
+
+          </div>
+        </div>
+    </div>
+    <!--COMP SECTION END-->
+</div>
+<!--CONTENT END-->
