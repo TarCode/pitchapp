@@ -6,7 +6,7 @@ var Promise = require("bluebird");
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : process.env.MYSQL_USER || 'root',
-  password : "coder123",
+  password : "",
   database : 'pitchapp_test'
 });
 /*var connection = mysql.createConnection({

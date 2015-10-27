@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 14, 2015 at 11:10 AM
+-- Generation Time: Oct 27, 2015 at 12:12 PM
 -- Server version: 5.6.19-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -106,9 +106,16 @@ INSERT INTO `entrants` (`id`, `startup_id`, `competition_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `judges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `entrant_id` int(11) NOT NULL,
+  `competition_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `judges`
+--
+
+INSERT INTO `judges` (`id`, `competition_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
