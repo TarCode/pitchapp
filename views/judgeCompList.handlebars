@@ -1,0 +1,43 @@
+<div class="section no-pad-bot" id="index-banner">
+
+</div>
+<!--CONTENT START-->
+<div class="row">
+    <!--COMP SECTION START-->
+    <div id="comp" class="col s12">
+      <div class = "container">
+
+        <!--COMPETITION START -->
+        {{#comp}}
+          <div class="row">
+            <a href = "/judge/compList/entrants/{{id}}">
+            <div class="col s3"><img class = "responsive-img circle" src = "{{image_url}}"></div>
+            <div class="col s6">
+              <span class="flow-text">{{name}}</span>
+              <br>
+                <p>{{organizer}}
+                <br>
+                {{date}}
+                <br>
+                {{start_time}} - {{end_time}}
+                <br>
+                Entries: {{entrants}}</p>
+            </div>
+          </a>
+            <div class = "col s3">
+              <a href="/judge/compList/entrants/{{id}}" class="btn-floating btn-large waves-effect waves-light green listButton">Enter</a>
+            </div>
+          </div>
+          <hr/>
+          {{/comp}}
+          <!--COMPETITION END -->
+          <br><br>
+
+          <div class="section">
+
+          </div>
+        </div>
+    </div>
+    <!--COMP SECTION END-->
+</div>
+<!--CONTENT END-->

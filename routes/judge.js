@@ -5,6 +5,29 @@ lock = false;
 
 module.exports = function(){
 
+  this.showCompList = function(req, res, next){
+
+        req.services(function(err,services){
+           var judgeService = services.judgeDataServ;
+           judgeService.getComps(function(err, results) {
+                  if (err) return next(err);
+                  res.render('judgeCompList',  {comp:results});
+              });
+         })
+    };
+
+    this.showCompEntrants = function(req, res, next){
+
+          req.services(function(err,services){
+             var judgeService = services.judgeDataServ;
+             var data = req.params.competition_id;
+             judgeService.getCompEntrants(data, function(err, results) {
+                    if (err) return next(err);
+                    res.render('judgeCompEntrantsList',  {entrants:results});
+                });
+           })
+      };
+
    this.judge=function (req, res){
     req.services(function(err, services){
         var judgeDataServ = services.judgeDataServ;
@@ -29,7 +52,7 @@ module.exports = function(){
         });
       });
 
-  } 
+  }
 }
 
 

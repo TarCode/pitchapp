@@ -35,21 +35,21 @@ var newStartup = {
 var startupDataService= new StartupDataService(connection);
 
 describe('Startup Data Service', function(){
-    
+
     /** startup list test **/
     it('should find all startups', function (done) {
       startupDataService
         .getStartups()
-        .done(function(startups){          
+        .done(function(startups){
             assert.equal(3, startups.length);
             done();
         });
     });
 
-    
+
      /** Startup add test **/
     it('should add a startup to table ', function (done) {
-      
+
 
       startupDataService
         .addStartup(newStartup)
@@ -60,7 +60,7 @@ describe('Startup Data Service', function(){
               assert.equal(4, startups.length);
               done();
           });
-        }) 
+        })
     });
 
 
@@ -71,26 +71,26 @@ describe('Startup Data Service', function(){
              if(err) console.log(err);
              startupDataService
             .getStartupData(arr[0].id)
-            .done(function(startup){ 
+            .done(function(startup){
 
-                var dbStartUp={} 
-                for(key in startup[0]){                 
+                var dbStartUp={}
+                for(key in startup[0]){
                     if(key!='id'){
                       dbStartUp[key] = startup[0][key]
                     }
                 }
-                
+
                 assert.deepEqual(newStartup, dbStartUp);
                 done();
             });
           })
-      
+
     });
 
 
     /** startup delete test **/
     it('should delete a startup ',function(done){
-         
+
           connection.query("delete from startup where name = ?", newStartup.name, function(err){
              if(err) console.log(err);
           })
@@ -101,7 +101,7 @@ describe('Startup Data Service', function(){
               assert.equal(3, competitions.length);
               done();
           });
-       
+
 
     })
 

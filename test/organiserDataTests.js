@@ -28,7 +28,7 @@ describe('Organiser Data Service', function(){
         });
     });
 
-    it('should insert a competition', function (done) {
+    it('should insert and delete a competition', function (done) {
       var data = {
           name: "test",
           image_url: "/img/",
