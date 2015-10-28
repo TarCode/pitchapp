@@ -22,5 +22,8 @@ module.exports = function(connection){
   		insertData('SELECT * FROM criteria WHERE competition_id = ?',data,cb);
   };
 
+  this.scoreStartup = function(data,cb){
+      insertData('insert into scores set ?',data,cb);
+  };
 
 }

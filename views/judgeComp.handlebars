@@ -1,3 +1,7 @@
+
+<script type="text/javascript">
+	configure({{startup_id}},{{comp_id}})
+</script>
 <div class='row'>
 	<div class='col s12 m3 profile'>
 		  {{#startup}}
@@ -58,14 +62,14 @@
         <ul class="collection">
     		<li class="collection-item active">
 			      <p>Overall Startup Score &nbsp <span class='chip teal lighten-4 form-control' id='totalScore'> No Score yet  </span></p>
-			      <button class="btn waves-effect waves-dark orange " type="submit" name="action">Submit
+			      <button class="btn waves-effect waves-dark orange " onclick='sendScore();' name="action">Submit
 			    	<i class="material-icons right">send</i>
 			  	</button>
 			</li>
 
     		{{#criterias}}
     		<script type="text/javascript">
-    			addCriteria('{{elemID}}')
+    			addCriteria('{{elemID}}',{{id}})
     		</script>
 		    <li class="collection-item col s12">
 		         <p class="title col s12"><b>{{name}}</b></p>

@@ -65,7 +65,7 @@ var judge = new JudgeMethods();
 app.get('/judge/compList', judge.showCompList);
 app.get('/judge/compList/entrants/:competition_id',judge.showCompEntrants);
 app.get('/judge/:competition_id/:startup_id', judge.judge);
-
+app.post('/judge/:competition_id/:startup_id', judge.scoreStartup);
 
 
 //middleware user check
