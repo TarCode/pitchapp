@@ -128,6 +128,8 @@ CREATE TABLE IF NOT EXISTS `scores` (
   `entrant_id` int(11) NOT NULL,
   `judge_id` int(11) NOT NULL,
   `criteria_id` int(11) NOT NULL,
+  `points` INT( 20 ) NOT NULL,
+  `feedback` TEXT NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
