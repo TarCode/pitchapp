@@ -19,8 +19,8 @@ var app = express();
 
 var dbOptions = {
      host: 'localhost',
-      user: 'tarcode',
-      password: 'coder123',
+      user: 'root',
+      password: 'theaya5379',
       port: 3306,
       database: 'pitchapp'
 };
@@ -48,7 +48,7 @@ app.use(bodyParser.json());
 
 var startup = new StartupMethods();
 app.get('/', startup.land);
-app.get('/startup/compList', startup.showStartupList);
+app.get('/startup/compList', startup.showCompList);
 app.get('/startup/comp/:id', startup.startupComp);
 app.get('/startup/new/:id', startup.newStartup);
 app.post('/startup/new/add/:id', startup.addStartup);
@@ -65,7 +65,7 @@ var judge = new JudgeMethods();
 app.get('/judge/compList', judge.showCompList);
 app.get('/judge/compList/entrants/:competition_id',judge.showCompEntrants);
 app.get('/judge/:competition_id/:startup_id', judge.judge);
-
+app.post('/judge/:competition_id/:startup_id', judge.scoreStartup);
 
 
 //middleware user check

@@ -9,11 +9,11 @@ module.exports = function(){
 
     }
 
-      this.showStartupList = function(req, res){
+      this.showCompList = function(req, res){
 
             req.services(function(err,services){
                var startupService = services.startupDataServ;
-               startupService.getStartups(function(err, results) {
+               startupService.getStartupCompetitions(function(err, results) {
                       if (err) return next(err);
                       res.render('startupList',  {comp:results});
                   });

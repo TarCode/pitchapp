@@ -15,7 +15,7 @@ module.exports = function(connection){
 		}
 
 
-		this.getStartups = function(cb){
+		this.getStartupCompetitions = function(cb){
 				getData('SELECT id, name, image_url, entrants, organizer, description, location, DATE_FORMAT(date, "%d/%l/%Y") as date, start_time, end_time  FROM competition',cb);
 		}
 
