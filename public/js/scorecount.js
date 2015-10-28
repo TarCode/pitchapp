@@ -1,37 +1,47 @@
-console.log('\n\t Scorecount \n\n')
-
-var addCriteria = function(id){
-	
-	console.log('\nadding criteria '+id)
-	scores[id]=0;
-	var elem ='#'+id
-	console.log(elem)
+var scores = {}
+var finalScore=0;
+var addCriteria = function(criteria){
+	scores[criteria]={};
+	scores[criteria]['points']=0;
+	scores[criteria]['feedback']='';
+	var elem ='#'+criteria
 	CalculateTotalScore();
 	
 }
 
 
 
-var scores = {}
-var setScore = function(id,score){
-	console.log('--Setting score of--'+id)
 
-	if(scores[id] == undefined){
-		scores[id] =  score
+var setScore = function(criteria,score){
+	if(scores[criteria] == undefined){
+		scores[criteria]={};
+		scores[criteria]['points']=score;
 	}
 	else{
-		scores[id] =  score;
-	}
+			scores[criteria]['points']=score;
+		}
 
 	CalculateTotalScore();
 }
 
-var finalScore=0;
+var setFeedback = function(criteria,feedback){
+	if(scores[criteria] == undefined){
+		scores[criteria]={};
+		scores[criteria]['feedback']=feedback;
+	  }
+	else{
+		console.log('Setting feedback of '+criteria+' to \n\t\t'+feedback)
+		scores[criteria]['feedback']=feedback;
+	}
+	CalculateTotalScore();
+}
+
+
 var CalculateTotalScore = function(){
 	console.log(scores)
 	var totalScore=0;
-	for(score in scores){
-		totalScore += parseFloat(scores[score])
+	for(criteria in scores){
+		totalScore += parseFloat(scores[criteria].points)
 	}
 	$('#totalScore').html(' &nbsp '+totalScore+' &nbsp ')
 	finalScore=totalScore;
