@@ -48,7 +48,7 @@ app.use(bodyParser.json());
 
 var startup = new StartupMethods();
 app.get('/', startup.land);
-app.get('/startup/compList', startup.showStartupList);
+app.get('/startup/compList', startup.showCompList);
 app.get('/startup/comp/:id', startup.startupComp);
 app.get('/startup/new/:id', startup.newStartup);
 app.post('/startup/new/add/:id', startup.addStartup);
