@@ -52,7 +52,7 @@ describe('Organiser Data Service', function(){
             done();
         });
         after(function(done){
-          connection.query("delete from competition where name = ?", data.name, function(err){
+          connection.query("delete from competition where organizer = ?", data.organizer, function(err){
             done(err);
           });
           organiserDataService

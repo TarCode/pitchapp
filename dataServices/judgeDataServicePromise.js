@@ -35,5 +35,7 @@ module.exports = function(connection){
   		return queryExecutor.executeQuery('SELECT * FROM criteria WHERE competition_id = ?',data,cb);
   };
 
-
+  this.scoreStartup = function(data,cb){
+    return queryExecutor.executeQuery('INSERT INTO scores SET ?',data,cb);
+  };
 }

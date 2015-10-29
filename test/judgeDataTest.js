@@ -64,5 +64,34 @@ describe('Judge Data Service', function(){
             assert.equal(7, entrants.length);
             done();
         });
-});
+    });
+
+    /** Posts scores into table **/
+    it('should insert score list ',function(done){
+      var score = {  entrant_id: '1',
+                      judge_id: '1',
+                      criteria_id: '1',
+                      points: '3.5',
+                      feedback: 'awesome'
+                    }
+      judgeDataService
+        .scoreStartup(score)
+        .done(function(entrants){
+            done();
+        });
+        after(function(done){
+          connection.query("SELECT * from scores", function(err, scores){
+            assert.equal(1, scores.length);
+          });
+          connection.query("delete from scores where criteria_id = ?", score.criteria_id, function(err){
+            if(err) console.log(err);
+          });
+          connection.query("SELECT * from scores", function(err, scores){
+            assert.equal(0, scores.length);
+            done();
+          });
+
+
+        })
+    });
 });
