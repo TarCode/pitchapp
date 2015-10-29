@@ -55,15 +55,15 @@ module.exports = function(){
   }
 
   /* FOLLOWING METHOD STILL NEEDS TO BE REFACTORED & CLEANED */
-  this.scoreStartup=function (req, res){     
+  this.scoreStartup=function (req, res){
     req.services(function(err, services){
         var judgeDataServ = services.judgeDataServ;
           var comp_id = req.params.competition_id;
           var startup_id = req.params.startup_id;
           //console.log('\nscores submitted\n')
           var scores = req.body
+          var scoreData = [];
           for(sc in scores){
-            console.log('------->'+scores[sc])
             var data ={
                       entrant_id:startup_id,
                       judge_id:comp_id,      /* We'll change this when we have Judge profiles to use judge id's */
@@ -71,18 +71,18 @@ module.exports = function(){
                       points:scores[sc][1],
                       feedback:scores[sc][2]
                     }
-            console.log(data)
-            judgeDataServ.scoreStartup(data,function(err,results){
-                  if(err){console.log('\n'+err+'\n\n')}
-              })
+            scoreData.push(data);
+
           }
-           
-           res.send(scores)
-           
-          
-           
-       
-          
+          judgeDataServ.scoreStartup(scoreData,function(err,results){
+                if(err){console.log('\n'+err+'\n\n')}
+            });
+           console.log(scoreData);
+
+
+
+
+
       });
 
   }
