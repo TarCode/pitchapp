@@ -12,7 +12,16 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
-
+#logo{
+  width: 30%;
+  height: auto;
+}
+a{
+  color: #242479;
+}
+#logo-container{
+  margin-top: 0.2em;
+}
 nav .brand-logo {
     position: absolute;
     color: #fff;
@@ -61,6 +70,9 @@ nav .brand-logo {
   margin-top: 2em;
   margin-bottom: 0em;
   display: block;
+}
+.btn{
+  background-color: #242479;
 }
 .collection .collection-item{
   padding:1.5%;
