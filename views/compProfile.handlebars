@@ -16,54 +16,73 @@
       <div id="comp" class="col s12">
 
         <!--OPEN COMP-->
-        <div class = "openComp"><div class="row">
-          <div class="col s3"><br><i class="medium material-icons">assignment</i></div>
-          <div class="col s9">
-            <br>
-            <span class="flow-text">Open Competition
-            </span>
-          </div>
-        </div></div>
-        <div class = "closeComp"><div class="row">
-          <div class="col s3"><br><i class="medium material-icons">assignment</i></div>
-          <div class="col s9">
-            <br>
-            <span class="flow-text">Close Competition
-            </span>
-          </div>
-        </div></div>
-        <hr/>
+        
         <!--OPEN COMP END-->
           <!--COMPETITION START -->
           {{#comp}}
             <div class="col s12 m3">
-              <div class="col s12"><img class = "responsive-img circle" src = "{{image_url}}"></div>
+              <div class="col s12 "><img class = "responsive-img circle" src = "{{image_url}}"></div>
               <div class="col s12">
                 <span class="flow-text">{{name}}</span>
+                <a class="blue black-text waves-effect waves-light btn lighten-3"><i class="material-icons left">assignment</i>Edit </a>
+              
                 <br>
-                <div class="collection">
-                  <a href="#!" class="collection-item"><span class='btn col s12'>Date &nbsp </span><br><br>{{date}}</a>
-                  <a href="#!" class="collection-item"><span class='btn col s12'>Time</span><br><br>{{start_time}} - {{end_time}} </a>
-                  <a href="#!" class="collection-item"><span class='btn col s12'>Location</span><br><br>{{location}}</a>
-                  <a href="#!" class="collection-item"><span class='btn col s12'>Entries</span><br><br>{{entries}}</span></a>
+                <div class="collection card-panel grey lighten-3">
+                  <a href="#!" class="collection-item center grey black-text lighten-3">
+                    <span class='medium title '><b>Date &nbsp </b></span><br><br>{{date}}
+                  </a>
+                   <a href="#!" class="collection-item center grey black-text lighten-3">
+                    <span class='medium title '><b>Time &nbsp </b></span><br><br>{{start_time}} - {{end_time}}
+                  </a>
+                   <a href="#!" class="collection-item center grey black-text lighten-3">
+                    <span class='medium title '><b>Location &nbsp </b></span><br><br>{{location}}
+                  </a>
+                   <a href="#!" class="collection-item center grey black-text lighten-3">
+                    <span class='medium title '><b>Entries &nbsp </b></span><br><br>{{entries}}
+                  </a>
+                                 
                 </div>
               </div>
             </div>
             <!--COMPETITION END -->
-            <div class = "col s12 m6">
-              <h4>{{organizer}}</h4>
-              <p>{{description}}</p>
-              <hr>
+            <div class = "col s12 m9 card-panel  center orange lighten-1">
+              <h3 class='title'>{{organizer}}</h3>
+              <div class = "openComp">
+                <a class="white black-text waves-effect waves-light btn"><i class="material-icons left">assignment</i>Open Competition </a>
+              
+              </div>
+              <div class = "closeComp">
+                <a class="white black-text waves-effect waves-light btn"><i class="material-icons left">assignment</i>Close Competition </a>
+              </div>
+              <p><b>{{description}}</b></p>
+         
               {{/comp}}
-              <h5>Minimum Requirements</h4>
-                <ul>
-                  <li>Under 5 years old</li>
-                  <li>Turnover less than R1bn</li>
-                  <li>Constrain</li>
-                  <li>Whatever</li>
+              
+            </div>
+            <div class='col s12 m9 card-panel grey lighten-3 center'>
+              <h5>Minimum Requirements</h5>
+                <ul class="collapsible" data-collapsible="accordion">
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons"></i>Age Requirements </div>
+                    <div class="collapsible-body"><p>Participant startup companies should be no older than 5 years.</p></div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons"></i>Startup Turnover Requirements </div>
+                    <div class="collapsible-body"><p> Startups are required to have a turnover of less than R1 Billion </p></div>
+                  </li>
+                 
+                 <li>
+                    <div class="collapsible-header"><i class="material-icons"></i>Constraints </div>
+                    <div class="collapsible-body"><p>Startups who have no employees are not allowed to participate</p></div>
+                  </li>
+                  
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons"> </i>Other Requirements</div>
+                    <div class="collapsible-body"><p>Participant startup companies should be registered pty ltd's.</p></div>
+                  </li>
                 </ul>
 
-                <h5>Prizes</h4>
+                <h5>Prizes</h5>
                   <ul>
                     <li><strong>1st Prize: </strong>R500 000</li>
                     <li><strong>2nd Prize: </strong>R250 000</li>
@@ -71,7 +90,6 @@
                     <li><strong>4th Prize: </strong>Nothing</li>
                   </ul>
             </div>
-
             <div class="section">
 
             </div>
