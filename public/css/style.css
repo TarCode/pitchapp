@@ -22,6 +22,11 @@ a{
 #logo-container{
   margin-top: 0.2em;
 }
+#download-button{
+  margin: 5px;
+  min-width: 10em;
+}
+
 nav .brand-logo {
     position: absolute;
     color: #fff;
