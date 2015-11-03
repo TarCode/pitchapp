@@ -26,4 +26,8 @@ module.exports = function(connection){
       insertData('insert into scores set ?',data,cb);
   };
 
+  this.getTotals = function(data,cb){
+      insertData('SELECT entrant_id, score FROM scores WHERE competition_id = ?, GROUP BY entrant_id ORDER BY score DESC',data,cb);
+  };
+
 }
