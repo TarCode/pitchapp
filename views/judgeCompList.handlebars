@@ -6,7 +6,9 @@
     <!--COMP SECTION START-->
     <div id="comp" class="col s12">
       <div class = "container">
-
+        {{#entrants}}
+        <a href="/judge/{{competition_id}}/{{startup_id}}" class="btn-floating btn-large waves-effect waves-light green listButton">Judge</a>
+        {{/entrants}}
         <!--COMPETITION START -->
         {{#comp}}
           <div class="row">
@@ -25,7 +27,7 @@
             </div>
           </a>
             <div class = "col s3">
-              <a href="/judge/compList/entrants/{{id}}" class="btn-floating btn-large waves-effect waves-light green listButton">Open</a>
+
             </div>
           </div>
           <hr/>

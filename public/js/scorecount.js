@@ -12,7 +12,7 @@ var addCriteria = function(criteria,dbID){
 	scores[criteria][2]='';
 	var elem ='#'+criteria
 	CalculateTotalScore();
-	
+
 }
 
 
@@ -60,5 +60,10 @@ var sendScore = function(){
 		  url: route,
 		  data: {pitch:scores},
 		  type: 'POST'
-		});
+		}).success(function(data){
+		 window.location.href = data;
+		alert(data);
+		})
+
+
 }

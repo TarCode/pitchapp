@@ -2,16 +2,21 @@
 var count = 0;
 var user = {};
 lock = false;
-
+var startupNum = 0;
 module.exports = function(){
 
   this.showCompList = function(req, res, next){
 
         req.services(function(err,services){
            var judgeService = services.judgeDataServ;
-           judgeService.getComps(function(err, results) {
+           judgeService.getComps(function(err, results1) {
+             var data = results1[0].id;
+             console.log(results1);
                   if (err) return next(err);
-                  res.render('judgeCompList',  {comp:results});
+                  judgeService.getCompEntrants(data, function(err, results) {
+                         if (err) return next(err);
+                         res.render('judgeCompList',  {comp: results1, entrants:results[0]});
+                     });
               });
          })
     };
@@ -51,8 +56,17 @@ module.exports = function(){
               });
         });
       });
-
   }
+  this.totals = function(req, res, next){
+        req.services(function(err,services){
+           var judgeService = services.judgeDataServ;
+           var data = req.params.competition_id;
+           judgeService.getTotals(data, function(err, results) {
+                  if (err) return next(err);
+                  res.render('totals',  {totals:results});
+              });
+         })
+    };
 
   /* FOLLOWING METHOD STILL NEEDS TO BE REFACTORED & CLEANED */
   this.scoreStartup=function (req, res){
@@ -62,7 +76,6 @@ module.exports = function(){
           var startup_id = req.params.startup_id;
           //console.log('\nscores submitted\n')
           var scores = req.body
-          var scoreData = [];
           for(sc in scores){
             var data ={
                       entrant_id:startup_id,
@@ -71,19 +84,33 @@ module.exports = function(){
                       points:scores[sc][1],
                       feedback:scores[sc][2]
                     }
-            scoreData.push(data);
+                    judgeDataServ.scoreStartup(data,function(err,results){
+                          if(err){console.log('\n'+err+'\n\n')}
+                      });
 
           }
-          judgeDataServ.scoreStartup(scoreData,function(err,results){
-                if(err){console.log('\n'+err+'\n\n')}
-            });
-           console.log(scoreData);
+          judgeDataServ.getComps(function(err, results1) {
+            var data = results1[0].id;
+            console.log(results1);
+                 if (err) return next(err);
+                 judgeDataServ.getCompEntrants(data, function(err, results) {
+                        if (err) return next(err);
+                        console.log(results);
+                    if(startupNum < results.length-1){
+                      startupNum++;
+                      console.log(results[startupNum]);
+                      res.send('/judge/'+data+'/'+results[startupNum].startup_id);
 
+                    }
+                    else{
+                      startupNum = 0;
+                      res.send('/judge/comp/'+data+'/totals');
 
+                      }
+                    });
+             });
 
-
-
-      });
+    });
 
   }
 }
