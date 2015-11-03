@@ -96,7 +96,7 @@ module.exports = function(){
                  judgeDataServ.getCompEntrants(data, function(err, results) {
                         if (err) return next(err);
                         console.log(results);
-                    if(startupNum <= results.length && results.length != 0 && results != undefined){
+                    if(startupNum < results.length-1){
                       startupNum++;
                       console.log(results[startupNum]);
                       res.send('/judge/'+data+'/'+results[startupNum].startup_id);
@@ -104,9 +104,9 @@ module.exports = function(){
                     }
                     else{
                       startupNum = 0;
-                      res.send('/judge/'+data+'/totals');
-                    }
+                      res.send('/judge/comp/'+data+'/totals');
 
+                      }
                     });
              });
 
