@@ -1,5 +1,10 @@
 (function($){
   $(function(){
+    $(':radio').change(
+      function(){
+        $('.choice').text( this.value + ' stars' );
+      }
+    );
     $(".openJudge").click(function(){
         $(".judgeBtn").show();
         $(".openJudge").hide();
@@ -30,7 +35,7 @@
               //console.log('setting scrore of :'+id)
               setScore(id,rating)
           });
-          
+
     $('.giveFeedback').click(function(){
         //console.log('giveFeedack class clicked')
         //console.log($(this).parent())
@@ -52,9 +57,9 @@
         closeFeedbackSection($(this))
         //$(this).parent().parent().find('button').css('display','inline')
         //$(this).parent().find('div').find('textarea').val('')
-        
+
     })
-    function closeFeedbackSection(elem){        
+    function closeFeedbackSection(elem){
         elem.parent().parent().find('button').css('display','inline')
     }
   }); // end of document ready

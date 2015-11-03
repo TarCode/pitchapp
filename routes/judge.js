@@ -9,9 +9,14 @@ module.exports = function(){
 
         req.services(function(err,services){
            var judgeService = services.judgeDataServ;
-           judgeService.getComps(function(err, results) {
+           judgeService.getComps(function(err, results1) {
+             var data = results1[0].id;
+             console.log(results1);
                   if (err) return next(err);
-                  res.render('judgeCompList',  {comp:results});
+                  judgeService.getCompEntrants(data, function(err, results) {
+                         if (err) return next(err);
+                         res.render('judgeCompList',  {comp: results1, entrants:results[0]});
+                     });
               });
          })
     };
