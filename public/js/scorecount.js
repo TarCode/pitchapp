@@ -54,8 +54,8 @@ var CalculateTotalScore = function(){
 }
 
 
-var sendScore = function(){
-	    var route= '/judge/'+config.comp_id+'/'+config.startup_id
+var sendScore = function(comp_id, entrant_id){
+	    var route= '/judge/'+comp_id+'/'+entrant_id+'';
 		$.ajax({
 		  url: route,
 		  data: {pitch:scores},
