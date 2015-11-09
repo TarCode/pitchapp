@@ -9,14 +9,9 @@ module.exports = function(){
 
         req.services(function(err,services){
            var judgeService = services.judgeDataServ;
-           judgeService.getComps(function(err, results1) {
-             var data = results1[0].id;
-                  if (err) return next(err);
-                  judgeService.getCompEntrants(data, function(err, results) {
-                    console.log(results);
-                         if (err) return next(err);
-                         res.render('judgeCompList',  {comp: results1});
-                     });
+           judgeService.getComps(function(err, results) {
+                 if (err) return next(err);
+                 res.render('judgeCompList',  {comp: results});
               });
          })
     };
@@ -28,7 +23,7 @@ module.exports = function(){
              var data = req.params.competition_id;
              judgeService.getCompEntrants(data, function(err, results) {
                     if (err) return next(err);
-                    res.render('judgeCompEntrantsList',  {entrants:results});
+                    res.render('judgeCompEntrantsList',  {entrants:results, competition_id: data});
                 });
            })
       };
@@ -36,25 +31,16 @@ module.exports = function(){
    this.judge=function (req, res){
     req.services(function(err, services){
         var judgeDataServ = services.judgeDataServ;
-          var comp_id = req.params.id;
-
-          console.log(req.params);
-          judgeDataServ.getEntrants(comp_id, function(err, startup) {
+          var comp_id = req.params.competition_id;
+          var entrant_id = req.params.id;
+          judgeDataServ.getEntrant(entrant_id, function(err, startup) {
             if( err )console.log(err);
-               var entrant_id = startup[0].id;
              judgeDataServ.getCriteria(comp_id, function(err, criterias) {
-
-               criterias.forEach(function(cri){
-                    if(cri.elemID == undefined){
-                      cri.elemID = cri.name.replace(/ /g,'')
-                    }
-                    else{
-                      cri.elemID = cri.name.replace(/ /g,'')
-                    }
-
-                });
+               console.log(req.params);
                 res.render('judgeComp',{criterias:criterias, startup:startup[0],comp_id:comp_id,entrant_id:entrant_id});
-              });
+
+            });
+
         });
       });
   }
@@ -80,8 +66,9 @@ module.exports = function(){
           var scores = req.body
           for(sc in scores){
             var data ={
+                      competition_id: comp_id,
                       entrant_id:entrant_id,
-                      judge_id:comp_id,      /* We'll change this when we have Judge profiles to use judge id's */
+                      judge_id:1,      /* We'll change this when we have Judge profiles to use judge id's */
                       criteria_id:scores[sc][0],
                       points:scores[sc][1],
                       feedback:scores[sc][2]
@@ -92,20 +79,20 @@ module.exports = function(){
 
           }
           judgeDataServ.getComps(function(err, results1) {
-            var data = results1[0].id;
+              var comp_id = req.params.competition_id;
                  if (err) return next(err);
-                 judgeDataServ.getCompEntrants(data, function(err, results) {
+                 judgeDataServ.getCompEntrants(comp_id, function(err, results) {
                         if (err) return next(err);
                     if(startupNum < results.length-1){
                       startupNum++;
                       var id = results1[startupNum].id;
-                      res.send('/judge/'+data+'/'+id);
+                      res.send('/judge/'+comp_id+'/'+id);
                       console.log(results1)
 
                     }
                     else{
                       startupNum = 0;
-                      res.send('/judge/comp/'+data+'/totals');
+                      res.send('/judge/comp/'+comp_id+'/totals');
 
                       }
                     });

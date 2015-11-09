@@ -14,8 +14,8 @@ module.exports = function(connection){
   this.getCompEntrants = function (data, cb) {
       insertData('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.competition_id = ?', data, cb );
   };
-  this.getEntrants = function (data, cb) {
-      insertData('SELECT * FROM startup, entrants, competition WHERE startup.id = entrants.startup_id AND competition.id = entrants.competition_id AND competition.id = ?', data, cb );
+  this.getEntrant = function (data, cb) {
+      insertData('SELECT * FROM startup, entrants WHERE startup.id = entrants.startup_id AND entrants.id = ?', data, cb );
   };
 
   this.getCriteria = function(data,cb){
@@ -27,7 +27,7 @@ module.exports = function(connection){
   };
 //scores table gets startup id instead of entrants id - needs to be fixed
   this.getTotals = function(data,cb){
-      insertData('SELECT entrant_id, name, points FROM scores, entrants, startup WHERE scores.entrant_id = entrants.id AND entrants.startup_id = startup.id GROUP BY entrant_id ORDER BY points DESC',data,cb);
+      insertData('SELECT entrant_id, name, points FROM scores, entrants, startup WHERE scores.entrant_id = entrants.id AND entrants.startup_id = startup.id AND entrants.competition_id = ? GROUP BY entrant_id ORDER BY points DESC',data,cb);
   };
 
 }
