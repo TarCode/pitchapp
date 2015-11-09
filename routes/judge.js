@@ -11,11 +11,11 @@ module.exports = function(){
            var judgeService = services.judgeDataServ;
            judgeService.getComps(function(err, results1) {
              var data = results1[0].id;
-             console.log(results1);
                   if (err) return next(err);
                   judgeService.getCompEntrants(data, function(err, results) {
+                    console.log(results);
                          if (err) return next(err);
-                         res.render('judgeCompList',  {comp: results1, entrants:results[0]});
+                         res.render('judgeCompList',  {comp: results1});
                      });
               });
          })
@@ -36,11 +36,12 @@ module.exports = function(){
    this.judge=function (req, res){
     req.services(function(err, services){
         var judgeDataServ = services.judgeDataServ;
-          var comp_id = req.params.competition_id;
-          var startup_id = req.params.startup_id;
-          judgeDataServ.getEntrants(startup_id, function(err, startup) {
-            if( err )console.log(err);
+          var comp_id = req.params.id;
 
+          console.log(req.params);
+          judgeDataServ.getEntrants(comp_id, function(err, startup) {
+            if( err )console.log(err);
+               var entrant_id = startup[0].id;
              judgeDataServ.getCriteria(comp_id, function(err, criterias) {
 
                criterias.forEach(function(cri){
@@ -52,7 +53,7 @@ module.exports = function(){
                     }
 
                 });
-                res.render('judgeComp',{criterias:criterias, startup:startup[0],comp_id:comp_id,startup_id:startup_id});
+                res.render('judgeComp',{criterias:criterias, startup:startup[0],comp_id:comp_id,entrant_id:entrant_id});
               });
         });
       });
@@ -73,12 +74,13 @@ module.exports = function(){
     req.services(function(err, services){
         var judgeDataServ = services.judgeDataServ;
           var comp_id = req.params.competition_id;
-          var startup_id = req.params.startup_id;
+          var entrant_id = req.params.id;
+            console.log(req.params);
           //console.log('\nscores submitted\n')
           var scores = req.body
           for(sc in scores){
             var data ={
-                      entrant_id:startup_id,
+                      entrant_id:entrant_id,
                       judge_id:comp_id,      /* We'll change this when we have Judge profiles to use judge id's */
                       criteria_id:scores[sc][0],
                       points:scores[sc][1],
@@ -91,15 +93,14 @@ module.exports = function(){
           }
           judgeDataServ.getComps(function(err, results1) {
             var data = results1[0].id;
-            console.log(results1);
                  if (err) return next(err);
                  judgeDataServ.getCompEntrants(data, function(err, results) {
                         if (err) return next(err);
-                        console.log(results);
                     if(startupNum < results.length-1){
                       startupNum++;
-                      console.log(results[startupNum]);
-                      res.send('/judge/'+data+'/'+results[startupNum].startup_id);
+                      var id = results1[startupNum].id;
+                      res.send('/judge/'+data+'/'+id);
+                      console.log(results1)
 
                     }
                     else{
