@@ -37,10 +37,17 @@ module.exports = function(){
             if( err )console.log(err);
              judgeDataServ.getCriteria(comp_id, function(err, criterias) {
                console.log(req.params);
+               criterias.forEach(function(cri){
+                    if(cri.elemID == undefined){
+                      cri.elemID = cri.name.replace(/ /g,'')
+                    }
+                    else{
+                      cri.elemID = cri.name.replace(/ /g,'')
+                    }
+
+                });
                 res.render('judgeComp',{criterias:criterias, startup:startup[0],comp_id:comp_id,entrant_id:entrant_id});
-
             });
-
         });
       });
   }
@@ -83,18 +90,9 @@ module.exports = function(){
                  if (err) return next(err);
                  judgeDataServ.getCompEntrants(comp_id, function(err, results) {
                         if (err) return next(err);
-                    if(startupNum < results.length-1){
-                      startupNum++;
-                      var id = results1[startupNum].id;
-                      res.send('/judge/'+comp_id+'/'+id);
-                      console.log(results1)
+                        //res.send('/judge/comp/'+comp_id+'/totals');
+                        res.send('/judge/compList/entrants/'+comp_id);
 
-                    }
-                    else{
-                      startupNum = 0;
-                      res.send('/judge/comp/'+comp_id+'/totals');
-
-                      }
                     });
              });
 
