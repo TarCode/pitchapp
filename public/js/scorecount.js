@@ -30,13 +30,18 @@ var setScore = function(criteria,score){
 	CalculateTotalScore();
 }
 
-var setFeedback = function(criteria,feedback){
+var setFeedback = function(criteria,feedback,elem){
 	if(scores[criteria] == undefined){
 		scores.criteria=[];
 		scores.criteria[2]=feedback;
 	  }
 	else{
-		//console.log('Setting feedback of '+criteria+' to \n\t\t'+feedback)
+		console.log('\n\t\t FEEDBACK PREVIEWING ')
+		console.log(feedback)
+		console.log('\t\tELEMENT')
+		console.log(elem)
+		console.log('\n\n')
+		viewFeedback(elem,feedback)
 		scores[criteria][2]=feedback;
 	}
 	CalculateTotalScore();
@@ -67,3 +72,7 @@ var sendScore = function(comp_id, entrant_id){
 
 
 }
+
+function viewFeedback(elem,feedback){
+	elem.html(feedback)
+} 

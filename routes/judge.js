@@ -86,6 +86,7 @@ module.exports = function(){
 
           }
           judgeDataServ.getComps(function(err, results1) {
+            console.log('Im here')
               var comp_id = req.params.competition_id;
                  if (err) return next(err);
                  judgeDataServ.getCompEntrants(comp_id, function(err, results) {

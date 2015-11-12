@@ -53,7 +53,9 @@
         var criteria=$(this).parent().parent().find('.pointsContainer').find('div').get(0).id;
         var feed= $(this).parent().find('div').find('textarea').val();
         console.log('\nfeed:\t'+feed+'\n')
-        setFeedback(criteria,feed)
+        var $preview = $(this).parent().parent().find('.previewFeed')
+        
+        setFeedback(criteria,feed,$preview)
         closeFeedbackSection($(this))
         //$(this).parent().parent().find('button').css('display','inline')
         //$(this).parent().find('div').find('textarea').val('')

@@ -27,7 +27,7 @@ module.exports = function(connection){
   };
 //scores table gets startup id instead of entrants id - needs to be fixed
   this.getTotals = function(data,cb){
-      insertData('SELECT entrant_id, name, points FROM scores, entrants, startup WHERE scores.entrant_id = entrants.id AND entrants.startup_id = startup.id AND entrants.competition_id = ? GROUP BY entrant_id ORDER BY points DESC',data,cb);
+      insertData('SELECT SUM( points ) AS points, startup.name FROM startup, scores, entrants WHERE scores.entrant_id = entrants.id AND entrants.startup_id = startup.id GROUP BY entrant_id ORDER BY points DESC ',data,cb);
   };
 
 }
