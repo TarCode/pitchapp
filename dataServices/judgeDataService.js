@@ -27,6 +27,10 @@ module.exports = function(connection){
   this.scoreStartup = function(data,cb){
       insertData('insert into scores set ?',data,cb);
   };
+  this.giveScoreFeedback = function(data,cb){
+    console.log('DATA:'+JSON.stringify(data))
+     insertData('update scores set feedback = ? where id = ? ',data,cb)
+  }
   this.entrantJudgedStatus = function(data,cb){
       insertData('update entrants set judged = ? where id = ? ',data,cb)
   }
@@ -36,7 +40,7 @@ module.exports = function(connection){
   };
 
   this.getEntrantTotal = function(data,cb){
-      insertData('SELECT entrants.id, startup.name ,criteria.name as criteria, scores.feedback, scores.points FROM entrants, scores,startup ,criteria WHERE entrants.id = scores.entrant_id and entrants.startup_id = startup.id and criteria.id = scores.criteria_id AND scores.entrant_id =?',data,cb);
+      insertData('SELECT entrants.id, startup.name ,criteria.name as criteria,scores.id as score_id, scores.feedback, scores.points FROM entrants, scores,startup ,criteria WHERE entrants.id = scores.entrant_id and entrants.startup_id = startup.id and criteria.id = scores.criteria_id AND scores.entrant_id =?',data,cb);
   };
 
 }

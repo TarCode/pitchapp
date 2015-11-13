@@ -9,23 +9,32 @@
 		</div>
 
 		<div class='card-panel grey lighten-4 red-text'>
-			
+			<input class='entrantID' type='hidden' value='{{id}}'>
+			<input class='scoreID' type='hidden' value='{{score_id}}'>
 			{{#feedback}}
 			<h5 class='badge grey lighten-3'> Feedback </h5>
 			<h6>{{this}}</h6>
 			<br>
-			<button class=' orange btn col s6 m6'> Edit </button>
+			
+
+			<textarea id="feedbackArea" name='feedback' class="materialize-textarea feedbackEdit grey lighten-2 black-text" >{{this}}</textarea>
+			<button class=' editFeedback orange btn col s6 m6'> Edit </button>
 			<button class='  red btn col s6 m6'> Remove </button>
 			{{/feedback}}
-			{{^feedback}}
-			 <div class="input-field white col s12">
-		        <textarea id="feedbackArea"  name='feedback' class="materialize-textarea feedbackField" ></textarea>
-		        
-			</div>
-			<button class='green  btn col s6 m6'> add feedback</button>	
-			{{/feedback}}
+			<form action='/judge/results/updateScoreFeedback/{{id}}/{{score_id}}' method='POST'>
+
+				{{^feedback}}
+
+				
+			        <textarea id="feedbackArea"  name='feedback' class="materialize-textarea feedbackField" ></textarea>
+			        
+		
+				<button class='green  btn col s6 m6' type='submit'> add feedback</button>	
+				{{/feedback}}
+			</form>
+
 		</div>
-	
+
 		{{/results}}
 	</div>
 </div>

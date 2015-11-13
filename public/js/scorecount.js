@@ -76,3 +76,7 @@ var sendScore = function(comp_id, entrant_id){
 function viewFeedback(elem,feedback){
 	elem.html(feedback)
 } 
+
+function updateFeedback(){
+	$(this).html('Save')
+}

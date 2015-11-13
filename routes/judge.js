@@ -63,6 +63,20 @@ module.exports = function(){
         });
       });
   }
+  this.updateScoreFeedback = function(req,res){
+    req.services(function(err,services){
+      var judgeService = services.judgeDataServ;
+      var entrant_id =req.params.entrant_id
+      var score_id = req.params.score_id;
+      var data = req.body.feedback;
+      console.log('Updating feedback of :'+score_id+'\nto :\t'+JSON.stringify(data))
+      judgeService.giveScoreFeedback([data,score_id],function(err,results){
+          if(err)return next(err)
+            res.redirect('/judge/results/'+entrant_id)
+      })
+    })
+      
+  }
   this.showEntrantResult = function(req, res, next){
         req.services(function(err,services){
            var judgeService = services.judgeDataServ;
