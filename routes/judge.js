@@ -23,10 +23,22 @@ module.exports = function(){
              var data = req.params.competition_id;
              judgeService.getCompEntrants(data, function(err, results) {
                     if (err) return next(err);
+
+                    results.forEach(function(result){
+                      if(result.judged==1){
+                        result.judged=true
+                      }
+                      else{
+                        result.judged=false
+                      }
+                    })
+
                     res.render('judgeCompEntrantsList',  {entrants:results, competition_id: data});
                 });
            })
       };
+
+
 
    this.judge=function (req, res){
     req.services(function(err, services){
@@ -51,6 +63,38 @@ module.exports = function(){
         });
       });
   }
+  this.updateScoreFeedback = function(req,res){
+    req.services(function(err,services){
+      var judgeService = services.judgeDataServ;
+      var entrant_id =req.params.entrant_id
+      var score_id = req.params.score_id;
+      var data = req.body.feedback;
+      console.log('Updating feedback of :'+score_id+'\nto :\t'+JSON.stringify(data))
+      judgeService.giveScoreFeedback([data,score_id],function(err,results){
+          if(err)return next(err)
+            res.redirect('/judge/results/'+entrant_id)
+      })
+    })
+      
+  }
+  this.showEntrantResult = function(req, res, next){
+        req.services(function(err,services){
+           var judgeService = services.judgeDataServ;
+           var data = req.params.entrant_id;
+           judgeService.getEntrantTotal(data, function(err, results) {
+                  if (err) return next(err);
+                  console.log('\n\n\t RESULTS')
+                  console.log(JSON.stringify(results))
+                  results.forEach(function(result){
+                    if(result.feedback==''){
+                      console.log('\n\tno feedback for'+result.criteria)
+                      result.feedback=false;
+                    }
+                  })
+                  res.render('entrantResults',  {results:results, name:results[0].name});
+              });
+         })
+    };
   this.totals = function(req, res, next){
         req.services(function(err,services){
            var judgeService = services.judgeDataServ;
@@ -71,6 +115,9 @@ module.exports = function(){
             console.log(req.params);
           //console.log('\nscores submitted\n')
           var scores = req.body
+          console.log('\n\n\t----DEBUGING SCORES----')
+          console.log('\tSCORES:\t'+JSON.stringify(scores))
+
           for(sc in scores){
             var data ={
                       competition_id: comp_id,
@@ -80,11 +127,18 @@ module.exports = function(){
                       points:scores[sc][1],
                       feedback:scores[sc][2]
                     }
-                    judgeDataServ.scoreStartup(data,function(err,results){
-                          if(err){console.log('\n'+err+'\n\n')}
-                      });
+                    console.log('\n\tPOINTS:\t'+JSON.stringify(data.points)+'\tCRITERIA:'+data.criteria_id)
+                  
+                        judgeDataServ.scoreStartup(data,function(err,results){
+                              if(err){console.log('\nHERE:'+err+'\n\n')}
 
+                          });
+                    
           }
+            judgeDataServ.entrantJudgedStatus([1,entrant_id],function(){
+                      if(err){console.log('\n'+err+'\n\n')}
+             })
+
           judgeDataServ.getComps(function(err, results1) {
             console.log('Im here')
               var comp_id = req.params.competition_id;

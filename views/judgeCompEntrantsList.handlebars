@@ -5,7 +5,7 @@
 <div class="row">
     <!--COMP SECTION START-->
     <div id="comp" class="col s12">
-      <a href =  "/judge/comp/{{competition_id}}/totals" class="btn-large waves-effect waves-light green">results</a>
+      <a href =  "/judge/comp/{{competition_id}}/totals" class="btn-large waves-effect waves-light light-green accent-4">results</a>
       <div class = "container">
         <!--ENTRANTS START -->
         {{#entrants}}
@@ -32,8 +32,17 @@
             </span>
           </div>
           <div class = "col s3">
-
-            <a href="/judge/{{competition_id}}/{{id}}"  class="judgeBtn hidden btn-large waves-effect waves-light blue listButton">Judge</a>
+          
+          {{#judged}}
+              <a href="/judge/results/{{id}}"  class="judgeBtn hidden btn-large waves-effect waves-light green darken-3 listButton">view results</a>
+          {{/judged}}
+          {{^judged}}
+              <a href="/judge/{{competition_id}}/{{id}}"  class="judgeBtn hidden btn-large waves-effect waves-light blue listButton">Judge</a>
+          {{/judged}}
+            
+          
+          
+     
 
           </div>
         </div>

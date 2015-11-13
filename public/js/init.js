@@ -61,8 +61,49 @@
         //$(this).parent().find('div').find('textarea').val('')
 
     })
+    var editToggle=0;
+    $('.editFeedback').clicktoggle(function(){
+
+         
+         $(this).html('Save');
+         $(this).next().html('Cancel')
+         $(this).parent().find('.feedbackEdit').css('display','inline')
+     },function(){
+        var text = {feedback:$(this).parent().find('.feedbackEdit').val()};
+        var entrantid = $(this).parent().find('.entrantID').val();
+        var scoreid = $(this).parent().find('.scoreID').val();
+        var url = '/judge/results/updateScoreFeedback/'+entrantid+'/'+scoreid
+        $.post(url,text,function(){
+             var url ='/judge/results/'+entrantid
+            window.location.href=url
+        })
+
+        $(this).parent().find('.feedbackEdit').css('display','none')
+        $(this).html('Edit')
+        $(this).next().html('Remove')       
+     })
+               
+            
+              
+            
+
+        
+   
     function closeFeedbackSection(elem){
         elem.parent().parent().find('button').css('display','inline')
     }
   }); // end of document ready
 })(jQuery); // end of jQuery name space
+$.fn.clicktoggle = function(a, b) {
+    return this.each(function() {
+        var clicked = false;
+        $(this).click(function() {
+            if (clicked) {
+                clicked = false;
+                return b.apply(this, arguments);
+            }
+            clicked = true;
+            return a.apply(this, arguments);
+        });
+    });
+};

@@ -60,6 +60,9 @@ nav .brand-logo {
   color: green;
   padding-bottom: 0.1em;
 }
+ .feedbackEdit{
+  display: none;
+ }
 .closeComp{
   display: none;
   color: red;
