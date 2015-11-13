@@ -1,15 +1,29 @@
 <div class='container'>
-	<div class=' light-green center lighten-3 card-panel'>
+	<div class=' light-green accent-1 center darken-3 card-panel'>
 		<h1> {{name}} </h1>
 		<h5> Pitch Results </h5>
 		{{#results}}
 		<div class='card-panel small white black-text'>
 			<h5>{{criteria}}</h5>
-			<h4><b>{{points}}</b></h4>
+			<h4><strong><b>{{points}}</b></strong></h4>
 		</div>
 
 		<div class='card-panel grey lighten-4 red-text'>
-			<h6>{{feedback}}</h6>
+			
+			{{#feedback}}
+			<h5 class='badge grey lighten-3'> Feedback </h5>
+			<h6>{{this}}</h6>
+			<br>
+			<button class=' orange btn col s6 m6'> Edit </button>
+			<button class='  red btn col s6 m6'> Remove </button>
+			{{/feedback}}
+			{{^feedback}}
+			 <div class="input-field white col s12">
+		        <textarea id="feedbackArea"  name='feedback' class="materialize-textarea feedbackField" ></textarea>
+		        
+			</div>
+			<button class='green  btn col s6 m6'> add feedback</button>	
+			{{/feedback}}
 		</div>
 	
 		{{/results}}

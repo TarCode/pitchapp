@@ -71,7 +71,12 @@ module.exports = function(){
                   if (err) return next(err);
                   console.log('\n\n\t RESULTS')
                   console.log(JSON.stringify(results))
-
+                  results.forEach(function(result){
+                    if(result.feedback==''){
+                      console.log('\n\tno feedback for'+result.criteria)
+                      result.feedback=false;
+                    }
+                  })
                   res.render('entrantResults',  {results:results, name:results[0].name});
               });
          })
