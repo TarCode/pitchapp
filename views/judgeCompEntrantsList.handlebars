@@ -32,8 +32,17 @@
             </span>
           </div>
           <div class = "col s3">
-
-            <a href="/judge/{{competition_id}}/{{id}}"  class="judgeBtn hidden btn-large waves-effect waves-light blue listButton">Judge</a>
+          
+          {{#judged}}
+              <a href="/judge/results/{{id}}"  class="judgeBtn hidden btn-large waves-effect waves-light green darken-3 listButton">view results</a>
+          {{/judged}}
+          {{^judged}}
+              <a href="/judge/{{competition_id}}/{{id}}"  class="judgeBtn hidden btn-large waves-effect waves-light blue listButton">Judge</a>
+          {{/judged}}
+            
+          
+          
+     
 
           </div>
         </div>

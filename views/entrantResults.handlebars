@@ -1,0 +1,18 @@
+<div class='container'>
+	<div class=' light-green center lighten-3 card-panel'>
+		<h1> {{name}} </h1>
+		<h5> Pitch Results </h5>
+		{{#results}}
+		<div class='card-panel small white black-text'>
+			<h5>{{criteria}}</h5>
+			<h4><b>{{points}}</b></h4>
+		</div>
+
+		<div class='card-panel grey lighten-4 red-text'>
+			<h6>{{feedback}}</h6>
+		</div>
+	
+		{{/results}}
+	</div>
+</div>
+

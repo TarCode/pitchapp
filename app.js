@@ -63,6 +63,7 @@ app.get('/org/startup/delete/:id', organiser.delStartup);
 
 var judge = new JudgeMethods();
 app.get('/judge/compList', judge.showCompList);
+app.get('/judge/results/:entrant_id', judge.showEntrantResult);
 app.get('/judge/compList/entrants/:competition_id',judge.showCompEntrants);
 app.get('/judge/:competition_id/:id', judge.judge);
 app.post('/judge/:competition_id/:id', judge.scoreStartup);
