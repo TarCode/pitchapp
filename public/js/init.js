@@ -68,8 +68,10 @@
          $(this).html('Save');
          $(this).next().html('Cancel')
          $(this).parent().find('.feedbackEdit').css('display','inline')
+         $(this).parent().find('.feedbackPreview').css('display','none')
      },function(){
         var text = {feedback:$(this).parent().find('.feedbackEdit').val()};
+        $(this).parent().find('.feedbackPreview').css('display','inline')
         var entrantid = $(this).parent().find('.entrantID').val();
         var scoreid = $(this).parent().find('.scoreID').val();
         var url = '/judge/results/updateScoreFeedback/'+entrantid+'/'+scoreid

@@ -67,7 +67,7 @@ var sendScore = function(comp_id, entrant_id){
 		  type: 'POST'
 		}).success(function(data){
 		 window.location.href = data;
-		alert(data);
+		
 		})
 
 
