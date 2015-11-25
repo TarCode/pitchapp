@@ -102,3 +102,11 @@ nav .brand-logo {
 @media only screen and (max-device-width: 480px) {
        .startupInfo{display:none;}
   }
+.addbtn{
+
+  box-shadow:1px 1px 1px 1px grey;
+}
+.addbtn:hover{
+    transform:scale(1.1);
+    transition:transform .1s linear;
+}

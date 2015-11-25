@@ -1,29 +1,5 @@
-<div class="row  center" id="index-banner">
-  <div class='container'>
-      <div class="grey lighten-4 row center col s12 card-panel">
-         <div class=' enter  col s12 m8 '>
-               <br><br>
-               <div class = " center row">
-                <div class = "col s12 "><img id = "logo" src = "img/pitchapp1.png"/></div>
-               </div>
-
-               <div class="row center">
-                <h5 class="header col s12 light"> Enter , Host & Judge <br> <small>startup competitions</small></h5>
-               </div>
-
-               <div class="row center">
-                  
-                  <div class="center col s12">
-                      <a href="/org/compList"  class="btn-large waves-effect waves-light orange accent-4">Host</a>
-                      <a href="/startup/compList"  class="btn-large waves-effect waves-light orange accent-4">Competitions</a>
-                      <a href="/judge/compList"  class="btn-large waves-effect waves-light orange accent-4">Judge</a>
-                  </div>
-                  
-               </div>
-               <br><br>
-        </div>
-
-        <div class="light-green accent-4 small card-panel col s12 m4 form">        
+<div class="container section no-pad-bot" id="index-banner">
+    <div class="light-green accent-4 small card-panel col s12 m4 form">        
             <div class="col s12">
               <ul class="tabs">
                 <li class="tab col s3 light-green accent-4"><a class='active white black-text' href="#test1">Sign Up</a></li>
@@ -74,25 +50,25 @@
                 <br>
               <h5 class='white-text'> Welcome Back!</h5>
              
-              <form class="col s12">
+              <form class="col s12" action='/login' method='post'>
 
                   <div class="row">
                     <div class="input-field col s12">
-                      <input  id="first_name" type="text" class="validate">
+                      <input  id="first_name" name='name' type="text" class="validate">
                       <label for="first_name" class='white-text'>email</label>
                     </div>
                  </div>
                   
                   <div class="row">
                     <div class="input-field col s12">
-                      <input id="password" type="password" class="validate">
+                      <input id="password" type="password" name='password' class="validate">
                       <label for="password" class='white-text'>Password</label>
                     </div>
                   </div>
                 
                   <div class="row">
                     <div class="input-field col s12">
-                      <button class='btn orange'> Submit </button>
+                      <button type='submit' class='btn orange'> Submit </button>
                     </div>
                   </div>
 
@@ -100,11 +76,5 @@
 
             </div>
          
-          </div>        
-          </div>
-      
-      </div>
+          </div>   
 </div>
-
-
-

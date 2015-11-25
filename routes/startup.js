@@ -5,19 +5,26 @@ lock = false;
 module.exports = function(){
     //log user in or redirect
     this.land = function (req, res){
+                  
         res.render('land');
 
     }
 
       this.showCompList = function(req, res){
-
+          
             req.services(function(err,services){
-               var startupService = services.startupDataServ;
+             
+                var startupService = services.startupDataServ;
                startupService.getStartupCompetitions(function(err, results) {
                       if (err) return next(err);
                       res.render('startupList',  {comp:results});
                   });
+                
+              
+               
              })
+              
+              
 
 
 

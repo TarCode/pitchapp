@@ -8,33 +8,44 @@ module.exports = function(){
   this.showCompList = function(req, res, next){
 
         req.services(function(err,services){
-           var judgeService = services.judgeDataServ;
-           judgeService.getComps(function(err, results) {
+          
+              var judgeService = services.judgeDataServ;
+              judgeService.getComps(function(err, results) {
                  if (err) return next(err);
-                 res.render('judgeCompList',  {comp: results});
+                
+                 results[0]['judge']=req.session.user; //need to find a better way to do this , this is for the displaying of the judge button
+                 res.render('judgeCompList',  {comp: results,user:req.session.user});
+
               });
+         
+           
+           
+           
          })
     };
 
     this.showCompEntrants = function(req, res, next){
 
           req.services(function(err,services){
-             var judgeService = services.judgeDataServ;
-             var data = req.params.competition_id;
-             judgeService.getCompEntrants(data, function(err, results) {
-                    if (err) return next(err);
+             
+                 var judgeService = services.judgeDataServ;
+                 var data = req.params.competition_id;
+                 judgeService.getCompEntrants(data, function(err, results) {
+                        if (err) return next(err);
 
-                    results.forEach(function(result){
-                      if(result.judged==1){
-                        result.judged=true
-                      }
-                      else{
-                        result.judged=false
-                      }
-                    })
+                        results.forEach(function(result){
+                          if(result.judged==1){
+                            result.judged=true
+                          }
+                          else{
+                            result.judged=false
+                          }
+                        })
 
-                    res.render('judgeCompEntrantsList',  {entrants:results, competition_id: data});
-                });
+                        res.render('judgeCompEntrantsList',  {entrants:results, competition_id: data,user:req.session.user});
+                    });
+             
+             
            })
       };
 
@@ -42,68 +53,81 @@ module.exports = function(){
 
    this.judge=function (req, res){
     req.services(function(err, services){
-        var judgeDataServ = services.judgeDataServ;
+       
+          var judgeDataServ = services.judgeDataServ;
           var comp_id = req.params.competition_id;
           var entrant_id = req.params.id;
           judgeDataServ.getEntrant(entrant_id, function(err, startup) {
             if( err )console.log(err);
-             judgeDataServ.getCriteria(comp_id, function(err, criterias) {
-               console.log(req.params);
-               criterias.forEach(function(cri){
-                    if(cri.elemID == undefined){
-                      cri.elemID = cri.name.replace(/ /g,'')
-                    }
-                    else{
-                      cri.elemID = cri.name.replace(/ /g,'')
-                    }
+              judgeDataServ.getCriteria(comp_id, function(err, criterias) {
+                  console.log(req.params);
+                  criterias.forEach(function(cri){
+                        if(cri.elemID == undefined){
+                          cri.elemID = cri.name.replace(/ /g,'')
+                        }
+                        else{
+                          cri.elemID = cri.name.replace(/ /g,'')
+                        }
 
+                    });
+                    res.render('judgeComp',{criterias:criterias, startup:startup[0],comp_id:comp_id,entrant_id:entrant_id,user:req.session.user});
                 });
-                res.render('judgeComp',{criterias:criterias, startup:startup[0],comp_id:comp_id,entrant_id:entrant_id});
             });
-        });
+        
+        
       });
   }
   this.updateScoreFeedback = function(req,res){
     req.services(function(err,services){
-      var judgeService = services.judgeDataServ;
-      var entrant_id =req.params.entrant_id
-      var score_id = req.params.score_id;
-      var data = req.body.feedback;
-      console.log('Updating feedback of :'+score_id+'\nto :\t'+JSON.stringify(data))
-      judgeService.giveScoreFeedback([data,score_id],function(err,results){
-          if(err)return next(err)
-            res.redirect('/judge/results/'+entrant_id)
-      })
+      
+            var judgeService = services.judgeDataServ;
+            var entrant_id =req.params.entrant_id
+            var score_id = req.params.score_id;
+            var data = req.body.feedback;
+            console.log('Updating feedback of :'+score_id+'\nto :\t'+JSON.stringify(data))
+            judgeService.giveScoreFeedback([data,score_id],function(err,results){
+                if(err)return next(err)
+                  res.redirect('/judge/results/'+entrant_id)
+            })
+    
+      
+      
     })
       
   }
   this.showEntrantResult = function(req, res, next){
         req.services(function(err,services){
-           var judgeService = services.judgeDataServ;
-           var data = req.params.entrant_id;
-           judgeService.getEntrantTotal(data, function(err, results) {
-                  if (err) return next(err);
-                  console.log('\n\n\t RESULTS')
-                  console.log(JSON.stringify(results))
-                  results.forEach(function(result){
-                    if(result.feedback==''){
-                      console.log('\n\tno feedback for'+result.criteria)
-                      result.feedback=false;
-                    }
-                  })
-                  res.render('entrantResults',  {results:results, name:results[0].name});
-              });
+            
+               var judgeService = services.judgeDataServ;
+               var data = req.params.entrant_id;
+               judgeService.getEntrantTotal(data, function(err, results) {
+                      if (err) return next(err);
+                      console.log('\n\n\t RESULTS')
+                      console.log(JSON.stringify(results))
+                      results.forEach(function(result){
+                        if(result.feedback==''){
+                          console.log('\n\tno feedback for'+result.criteria)
+                          result.feedback=false;
+                        }
+                      })
+                      res.render('entrantResults',  {results:results, name:results[0].name,user:req.session.user});
+                });
+            
+           
          })
     };
   this.totals = function(req, res, next){
         req.services(function(err,services){
-           var judgeService = services.judgeDataServ;
-           var data = req.params.competition_id;
-           judgeService.getTotals(data, function(err, results) {
-                  if (err) return next(err);
-                  res.render('totals',  {totals:results});
-              });
-         })
+           
+               var judgeService = services.judgeDataServ;
+               var data = req.params.competition_id;
+               judgeService.getTotals(data, function(err, results) {
+                      if (err) return next(err);
+                      res.render('totals',  {totals:results,user:req.session.user});
+                });
+           
+            
+        })
     };
 
   /* FOLLOWING METHOD STILL NEEDS TO BE REFACTORED & CLEANED */
@@ -150,7 +174,7 @@ module.exports = function(){
 
                     });
              });
-
+s
     });
 
   }

@@ -1,44 +1,79 @@
 <div class="section no-pad-bot" id="index-banner">
 
+
 </div>
 <!--CONTENT START-->
 <div class="row">
+    {{#user.judge}}
     <!--COMP SECTION START-->
     <div id="comp" class="col s12">
       <div class = "container">
-        {{#comp}}
-        <a href="/judge/compList/entrants/{{id}}" class="btn-large waves-effect waves-light light-green accent-4 listButton">Entrants</a>
-        <!--COMPETITION START -->
-
-          <div class="row">
-            <a href = "/judge/compList/entrants/{{id}}">
-            <div class="col s3"><img class = "responsive-img circle" src = "{{image_url}}"></div>
-            <div class="col s6">
-              <span class="flow-text">{{name}}</span>
-              <br>
-                <p>{{organizer}}
-                <br>
-                {{DATE}}
-                <br>
-                {{start_time}} - {{end_time}}
-                <br>
-                Entries: {{entrants}}</p>
-            </div>
-          </a>
-            <div class = "col s3">
-
-            </div>
+           <h6 class='chip transparent lighten-4'><small> Note : You can only Judge competitions you are invited to judge</small></h6>
+          {{#comp}}
+          <div class="row card-panel white accent-5 ">                
+                <div class="col s3">
+                      <img class = "responsive-img circle" src = "{{image_url}}">
+                </div>
+                <div class="col s6 center">
+                    <h4 class="flow-text">{{name}}</h4>
+                </div>
+                <div class="col s6 center">
+                    <ul class="collection">                      
+                      <li class="collection-item light-green accent-2 lighten-3">Hosted by {{organizer}}</li>
+                      <li class="collection-item">Date :  {{date}}</li>
+                      <li class="collection-item">Starts  {{start_time}} &nbsp & &nbsp Ends {{end_time}}</li>
+                      <li class="collection-item">{{entrants}} entrants so far</li>
+                    </ul>                      
+                </div>             
+                <div class = "col s3"> 
+                    <a href="/judge/compList/entrants/{{id}}" class="btn-large waves-effect waves-light light-green accent-4 listButton">Judge</a>                  
+                    <a href = "/startup/comp/{{id}}" class="btn-large waves-effect waves-light light-blue accent-4 listButton"> About </a>
+                </div>
           </div>
-          <hr/>
+       
           {{/comp}}
-          <!--COMPETITION END -->
-          <br><br>
-
           <div class="section">
 
           </div>
         </div>
     </div>
+    {{/user.judge}}
     <!--COMP SECTION END-->
+ 
+    {{^user.judge}}
+    <!--COMP SECTION START-->
+    <div id="comp" class="col s12">
+      <div class = "container">
+           <h6 class='chip transparent lighten-4'><small> Note : You can only Judge competitions you are invited to judge</small></h6>
+          {{#comp}}
+          <div class="row card-panel white accent-5 ">                
+                <div class="col s3">
+                      <img class = "responsive-img circle" src = "{{image_url}}">
+                </div>
+                <div class="col s6 center">
+                    <h4 class="flow-text">{{name}}</h4>
+                </div>
+                <div class="col s6 center">
+                    <ul class="collection">                      
+                      <li class="collection-item light-green accent-2 lighten-3">Hosted by {{organizer}}</li>
+                      <li class="collection-item">Date :  {{date}}</li>
+                      <li class="collection-item">Starts  {{start_time}} &nbsp & &nbsp Ends {{end_time}}</li>
+                      <li class="collection-item">{{entrants}} entrants so far</li>
+                    </ul>                      
+                </div>             
+                <div class = "col s3"> 
+                                    
+                    <a href = "/startup/comp/{{id}}" class="btn-large waves-effect waves-light light-blue accent-4 listButton"> About </a>
+                </div>
+          </div>
+       
+          {{/comp}}
+          <div class="section">
+
+          </div>
+        </div>
+    </div>
+    {{/user.judge}}
+
 </div>
 <!--CONTENT END-->

@@ -3,14 +3,16 @@ var express = require('express'),
     exphbs  = require('express-handlebars'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
-
+    session = require('express-session'),
+    cookieParser = require('cookie-parser'),
     OrganiserMethods = require('./routes/organiser'),
     JudgeMethods = require('./routes/judge'),
     StartupMethods = require('./routes/startup'),
-
+    userMethods =require('./routes/user')
     OrganiserDataService = require('./dataServices/organiserDataService'),
     JudgeDataService = require('./dataServices/judgeDataService'),
     startupDataService = require('./dataServices/startupDataService'),
+    userDataService = require('./dataServices/userDataService'),
     ConnectionProvider = require('./routes/connectionProvider');
     //session = require('express-session');
 
@@ -29,13 +31,16 @@ var serviceSetupCallback = function(connection){
 	return {
 		organiserDataServ : new OrganiserDataService(connection),
     startupDataServ : new startupDataService(connection),
-    judgeDataServ : new JudgeDataService(connection)
+    judgeDataServ : new JudgeDataService(connection),
+    userDataServ : new userDataService(connection)
 	}
 };
 
 var myConnectionProvider = new ConnectionProvider(dbOptions, serviceSetupCallback);
 app.use(myConnectionProvider.setupProvider);
 app.use(myConnection(mysql, dbOptions, 'pool'));
+app.use(cookieParser());
+app.use(session({secret:'veryfunnysecret'}));
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -44,11 +49,28 @@ app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-//app.use(session({secret: "bookworms", cookie: {maxAge: 120000}, resave:true, saveUninitialized: false}));
+
+
 
 var startup = new StartupMethods();
+var user = new userMethods();
 app.get('/', startup.land);
+app.get('/login',user.showLogin)
 app.get('/startup/compList', startup.showCompList);
+app.post('/login',user.login)
+app.use(function(req,res,next){
+   console.log('req.url'+req.url+'\nreq.session.user : '+JSON.stringify(req.session.user))
+    if(req.session.user){
+      next();
+    }
+    else{
+      res.render('pleaselogin')
+    }
+})
+
+
+
+
 app.get('/startup/comp/:id', startup.startupComp);
 app.get('/startup/new/:id', startup.newStartup);
 app.post('/startup/new/add/:id', startup.addStartup);
@@ -74,7 +96,7 @@ app.get('/judge/comp/:competition_id/totals', judge.totals);
 //middleware user check
 //app.use(main.middleCheck);
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3100;
 var server = app.listen(port, function () {
 
   var host = server.address().address;

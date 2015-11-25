@@ -14,8 +14,11 @@ this.showOrgList = function(req, res, next){
     		var organiserDataServ = services.organiserDataServ;
         organiserDataServ.getAllCompetitions(function(err, rows){
           if(err)	throw err;
+            rows.forEach(function(row){
+              row['user'] = req.session.user;
+            })
             res.render( 'orgList', {
-                comp : rows
+                comp : rows ,user:req.session.user
             });
         });
 
