@@ -6,37 +6,71 @@
     <!--COMP SECTION START-->
     <div id="comp" class="col s12">
       <div class = "container">
+         {{#user.startup}}
+         {{#comp}}
+          <div class="row card-panel white accent-5 ">
+                
+                <a href = "/startup/comp/{{id}}">
+                  <div class="col s3">
+                      <img class = "responsive-img circle" src = "{{image_url}}">
+                  </div>
+                  <div class="col s6 center">
+                    <h4 class="flow-text">{{name}}</h4>
+                  </div>
+                  <div class="col s6 center">
 
-        <!--COMPETITION START -->
-        {{#comp}}
-          <div class="row">
-            <a href = "/startup/comp/{{id}}">
-            <div class="col s3"><img class = "responsive-img circle" src = "{{image_url}}"></div>
-            <div class="col s6">
-              <span class="flow-text">{{name}}</span>
-              <br>
-                <p>{{organizer}}
-                <br>
-                {{date}}
-                <br>
-                {{start_time}} - {{end_time}}
-                <br>
-                Entries: {{entrants}}</p>
-            </div>
-          </a>
-            <div class = "col s3">
-              <a href="/startup/new/{{id}}" class="btn-floating btn-large waves-effect waves-light green listButton">Enter</a>
-            </div>
+                    <ul class="collection">                      
+                      <li class="collection-item light-green accent-2 lighten-3">Hosted by {{organizer}}</li>
+                      <li class="collection-item">Date :  {{date}}</li>
+                      <li class="collection-item">Starts  {{start_time}} &nbsp & &nbsp Ends {{end_time}}</li>
+                      <li class="collection-item">{{entrants}} entrants so far</li>
+                    </ul>
+                      
+                  </div>
+              </a>
+                <div class = "col s3">
+                  <a href="/startup/new/{{id}}" class="btn-floating btn-large waves-effect waves-light green listButton">Enter</a>
+                </div>
           </div>
-          <hr/>
+       
           {{/comp}}
-          <!--COMPETITION END -->
+          {{/user.startup}}
+
+          {{^user.startup}}
+          {{#comp}}
+          <div class="row card-panel white accent-5 ">
+                
+                <a href = "/startup/comp/{{id}}">
+                  <div class="col s3">
+                      <img class = "responsive-img circle" src = "{{image_url}}">
+                  </div>
+                  <div class="col s6 center">
+                    <h4 class="flow-text">{{name}}</h4>
+                  </div>
+                  <div class="col s6 center">
+
+                    <ul class="collection">                      
+                      <li class="collection-item light-green accent-2 lighten-3">Hosted by {{organizer}}</li>
+                      <li class="collection-item">Date :  {{date}}</li>
+                      <li class="collection-item">Starts  {{start_time}} &nbsp & &nbsp Ends {{end_time}}</li>
+                      <li class="collection-item">{{entrants}} entrants so far</li>
+                    </ul>
+                      
+                  </div>
+              </a>
+                <div class = "col s3">
+                  <a  class="grey btn-floating btn-large waves-effect waves-light green listButton">Enter</a>
+                </div>
+          </div>
+       
+          {{/comp}}
+          {{/user.startup}}
           <br><br>
 
           <div class="section">
 
-          </div>
         </div>
+    </div>
     </div>
     <!--COMP SECTION END-->
 </div>

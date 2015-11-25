@@ -7,40 +7,61 @@
     <div id="comp" class="col s12">
       <div class = "container">
         <!--NEW COMPETITION START-->
-        <a href = "/org/comp/new"><div class="row">
-          <div class="col s3"><br><i class="large material-icons">add</i></div>
-          <div class="col s9">
-            <br><br>
-            <span class="flow-text">Add New Competition
-            </span>
-          </div>
-        </div></a>
-        <hr/>
+
+            {{#user.organiser}}
+              <div class="card-panel">              
+                 <a href = "/org/comp/new">
+                    <i class="left small center material-icons circle light-green accent-5 white-text addbtn">add</i>
+                    <span class="flow-text">
+                      Add New Competition
+                   </span>
+                 </a>
+              </div>
+            {{/user.organiser}}
+
+
+                     
+       
+        
         <!--NEW COMPETITION END -->
 
         <!--COMPETITION START -->
         {{#comp}}
-          <div class="row">
-            <a href = "/org/comp/{{id}}">
-            <div class="col s3"><img class = "responsive-img circle" src = "{{image_url}}"></div>
-            <div class="col s6">
-              <span class="flow-text">{{name}}</span>
-              <br>
-                <p>{{organizer}}
-                <br>
-                {{date}}
-                <br>
-                {{start_time}} - {{end_time}}
-                <br>
-                Entries: {{entrants}}</p>
-            </div>
-          </a>
-            <div class = "col s3">
-              <a href = "/org/comp/delete/{{id}}" class="btn-floating btn-large waves-effect waves-light red listButton"><i class="material-icons">delete</i></a>
-              <a class="btn-floating btn-large waves-effect waves-light green listButton">Open</a>
-            </div>
+           
+          <div class="row card-panel white accent-5 ">
+                
+               
+                  <div class="col s3">
+                      <img class = "responsive-img circle" src = "{{image_url}}">
+                  </div>
+                  <div class="col s6 center">
+                    <h4 class="flow-text">{{name}}</h4>
+                  </div>
+                  <div class="col s6 center">
+
+                    <ul class="collection">                      
+                      <li class="collection-item light-green accent-2 lighten-3">Hosted by {{organizer}}</li>
+                      <li class="collection-item">Date :  {{date}}</li>
+                      <li class="collection-item">Starts  {{start_time}} &nbsp & &nbsp Ends {{end_time}}</li>
+                      <li class="collection-item">{{entrants}} entrants so far</li>
+                    </ul>
+                      
+                  </div>
+                {{#user.organiser}}
+                <div class = "col s3">
+                  <a href = "/org/comp/delete/{{id}}" class="btn-floating btn-large waves-effect waves-light red listButton"><i class="material-icons">delete</i></a>
+                  <a href = "/org/comp/{{id}}" class="btn-floating btn-large waves-effect waves-light green listButton">Open</a>
+                </div>
+                {{/user.organiser}}
+
+                {{^user.organiser}}
+                <div class = "col s3">
+                  <a  class="btn-floating btn-large waves-effect waves-light grey listButton"><i class="material-icons">delete</i></a>
+                  <a  class="btn-floating btn-large waves-effect waves-light grey listButton">Open</a>
+                </div>
+                {{/user.organiser}}
           </div>
-          <hr/>
+       
           {{/comp}}
           <!--COMPETITION END -->
           <br><br>
